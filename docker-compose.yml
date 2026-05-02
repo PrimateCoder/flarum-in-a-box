@@ -6,9 +6,7 @@ services:
     ports:
       - "8080:80"
     environment:
+      # Only FLARUM_FORUM_URL is honored at runtime (set if using a different port).
+      # All other config (admin, DB, extensions) is baked in at build time.
       - FLARUM_FORUM_URL=http://localhost:8080
-      - FLARUM_FORUM_TITLE=📦 Flarum-In-A-Box
-      - FLARUM_ADMIN_USER=admin
-      - FLARUM_ADMIN_PASS=password
-      - FLARUM_ADMIN_EMAIL=admin@example.com
     restart: unless-stopped

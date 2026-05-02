@@ -117,7 +117,7 @@ RUN rm -rf /root/.composer/cache
 FROM php:8.5-fpm-alpine
 
 LABEL org.opencontainers.image.title="Flarum-in-a-Box"
-LABEL org.opencontainers.image.description="All-in-one Flarum 2.x demo container with 45+ extensions"
+LABEL org.opencontainers.image.description="All-in-one Flarum 2.x demo container with ~50 extensions"
 LABEL org.opencontainers.image.source="https://github.com/PrimateCoder/flarum-in-a-box"
 
 # Install PHP extensions using pre-built binaries (auto-cleans build deps)
@@ -142,19 +142,20 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN mkdir -p /run/nginx
 COPY src/box/nginx.conf /etc/nginx/http.d/default.conf
 
-# ── File permissions ─────────────────────────────────────────────────
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html/storage /var/www/html/public/assets \
-    && find /var/www/html/vendor -type d ! -perm -755 -exec chmod 755 {} \;
-
 # ── Copy config files ────────────────────────────────────────────────
 COPY src/box/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY src/box/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# ── MariaDB data directory ───────────────────────────────────────────
+# ── MariaDB socket config ────────────────────────────────────────────
 RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld \
     && echo "pdo_mysql.default_socket = /run/mysqld/mysqld.sock" > /usr/local/etc/php/conf.d/mariadb-socket.ini
+
+# ── Build-time setup: install Flarum, enable extensions, seed content ─
+# This runs MariaDB temporarily during build to pre-populate everything.
+# The resulting data directory is baked into the image layer.
+COPY src/box/setup.sh /tmp/setup.sh
+RUN chmod +x /tmp/setup.sh && /tmp/setup.sh && rm -f /tmp/setup.sh
 
 # ── Ports ─────────────────────────────────────────────────────────────
 EXPOSE 80
