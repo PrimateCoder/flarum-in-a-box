@@ -1,0 +1,164 @@
+# Flarum-in-a-Box: All-in-one Docker container
+# Bundles Flarum 2.x + MariaDB + Nginx + PHP-FPM in a minimal Alpine image.
+#
+# Multi-stage build: builder stage compiles PHP extensions and installs
+# Flarum + extensions via Composer; final stage has only runtime deps.
+
+# ═══════════════════════════════════════════════════════════════════════
+# Stage 1: Builder — compile PHP extensions, install Flarum + extensions
+# ═══════════════════════════════════════════════════════════════════════
+FROM php:8.5-fpm-alpine AS builder
+
+# Build dependencies (only in builder stage, discarded in final image)
+RUN apk add --no-cache \
+        $PHPIZE_DEPS \
+        freetype-dev \
+        libjpeg-turbo-dev \
+        libpng-dev \
+        libzip-dev \
+        icu-dev \
+        unzip \
+        git \
+        curl
+
+# Compile PHP extensions
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) \
+        pdo_mysql \
+        gd \
+        zip \
+        intl \
+        exif
+
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Install Flarum
+WORKDIR /var/www/html
+RUN composer create-project flarum/flarum:^2.0 /var/www/html \
+        --stability=beta \
+        --prefer-dist \
+        --no-interaction \
+        --no-dev
+
+# Remove Realtime/Pusher (requires external service)
+RUN composer remove flarum/realtime --no-interaction --update-no-dev 2>/dev/null || true
+
+# Allow dev/beta extensions
+RUN composer config minimum-stability dev \
+    && composer config prefer-stable true
+
+# Install extensions one-by-one (failures skipped gracefully)
+RUN set -e; \
+    EXTENSIONS=" \
+        flarum/extension-manager \
+        flarum/nicknames \
+        pianotell/flarum-ext-flamoji \
+        fof/best-answer \
+        fof/byobu \
+        fof/drafts \
+        fof/follow-tags \
+        fof/formatting \
+        fof/polls \
+        fof/upload \
+        fof/user-bio \
+        fof/user-directory \
+        fof/ignore-users \
+        fof/linguist \
+        fof/categories \
+        fof/links \
+        fof/pages \
+        fof/sitemap \
+        fof/frontpage \
+        fof/gamification \
+        fof/moderator-notes \
+        fof/terms \
+        fof/anti-spam \
+        fof/reactions \
+        fof/share-social \
+        fof/synopsis \
+        fof/discussion-thumbnail \
+        fof/impersonate \
+        fof/split \
+        fof/merge-discussions \
+        fof/bbcode-details \
+        fof/discussion-views \
+        antoinefr/flarum-ext-bbcode-fa \
+        sycho/flarum-move-posts \
+        sycho/flarum-profile-cover \
+        acpl/mobile-tab \
+        ramon/avocado \
+        ramon/colored \
+        ekumanov/flarum-ext-post-search \
+        ekumanov/flarum-ext-forum-widgets \
+        ekumanov/flarum-ext-markdown-tables \
+        ekumanov/flarum-ext-inline-audio \
+        tryhackx/flarum-topic-rating \
+        fof/rich-text \
+        huseyinfiliz/modern-footer \
+        huseyinfiliz/stickiest \
+        huseyinfiliz/flarum-diff \
+        linkrobins/auto-verify \
+        linkrobins/font-sizer \
+    "; \
+    for ext in $EXTENSIONS; do \
+        echo "==> Installing $ext ..."; \
+        composer require "$ext" --no-interaction --prefer-dist --update-no-dev 2>&1 \
+            && echo "    ✓ $ext installed" \
+            || echo "    ✗ $ext skipped (not compatible)"; \
+    done
+
+# Clean up Composer cache in builder
+RUN rm -rf /root/.composer/cache
+
+# ═══════════════════════════════════════════════════════════════════════
+# Stage 2: Runtime — minimal image with only what's needed to run
+# ═══════════════════════════════════════════════════════════════════════
+FROM php:8.5-fpm-alpine
+
+LABEL org.opencontainers.image.title="Flarum-in-a-Box"
+LABEL org.opencontainers.image.description="All-in-one Flarum 2.x demo container with 45+ extensions"
+LABEL org.opencontainers.image.source="https://github.com/PrimateCoder/flarum-in-a-box"
+
+# Install PHP extensions using pre-built binaries (auto-cleans build deps)
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+RUN install-php-extensions pdo_mysql gd zip intl exif
+
+# Runtime dependencies
+RUN apk add --no-cache \
+        nginx \
+        mariadb \
+        mariadb-client \
+        supervisor \
+        curl
+
+# Copy Flarum application from builder
+COPY --from=builder /var/www/html /var/www/html
+
+# Copy Composer (needed for Extension Manager at runtime)
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# ── Nginx configuration ──────────────────────────────────────────────
+RUN mkdir -p /run/nginx
+COPY src/box/nginx.conf /etc/nginx/http.d/default.conf
+
+# ── File permissions ─────────────────────────────────────────────────
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 /var/www/html/storage /var/www/html/public/assets \
+    && find /var/www/html/vendor -type d ! -perm -755 -exec chmod 755 {} \;
+
+# ── Copy config files ────────────────────────────────────────────────
+COPY src/box/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY src/box/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# ── MariaDB data directory ───────────────────────────────────────────
+RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld \
+    && echo "pdo_mysql.default_socket = /run/mysqld/mysqld.sock" > /usr/local/etc/php/conf.d/mariadb-socket.ini
+
+# ── Ports ─────────────────────────────────────────────────────────────
+EXPOSE 80
+
+# ── Entrypoint & command ─────────────────────────────────────────────
+ENTRYPOINT ["entrypoint.sh"]
+CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

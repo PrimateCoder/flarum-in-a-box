@@ -1,0 +1,14 @@
+services:
+  flarum:
+    build:
+      context: .
+      dockerfile: src/box/Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - FLARUM_FORUM_URL=http://localhost:8080
+      - FLARUM_FORUM_TITLE=📦 Flarum-In-A-Box
+      - FLARUM_ADMIN_USER=admin
+      - FLARUM_ADMIN_PASS=password
+      - FLARUM_ADMIN_EMAIL=admin@example.com
+    restart: unless-stopped
