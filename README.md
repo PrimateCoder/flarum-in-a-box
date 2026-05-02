@@ -26,6 +26,17 @@ docker run -d -p 8080:80 --name flarum-in-a-box pianotell/flarum-in-a-box
 
 Then open [http://localhost:8080](http://localhost:8080).
 
+### Updating to the Latest Version
+
+Docker caches images locally, so to get the latest release you need
+to explicitly pull, remove the old container, and start a fresh one:
+
+```bash
+docker pull pianotell/flarum-in-a-box
+docker rm -f flarum-in-a-box
+docker run -d -p 8080:80 --name flarum-in-a-box pianotell/flarum-in-a-box
+```
+
 ## Default Accounts
 
 | Account | Username | Password |
@@ -102,6 +113,7 @@ docker run -d -p 9090:80 -e FLARUM_FORUM_URL=http://localhost:9090 \
 
 - [Source code on GitHub](https://github.com/PrimateCoder/flarum-in-a-box)
 - [Docker Hub](https://hub.docker.com/r/pianotell/flarum-in-a-box)
+- [Discuss on Flarum Community](https://discuss.flarum.org/d/39191-flarum-in-a-box-try-flarum-2x-in-one-command-with-docker)
 - [Report an issue](https://github.com/PrimateCoder/flarum-in-a-box/issues)
 
 ## License

@@ -20,6 +20,14 @@ This is the One Command:
 docker run -d -p 8080:80 --name flarum-in-a-box pianotell/flarum-in-a-box
 ```
 
+To **update** to the latest release, run these three commands:
+
+```
+docker pull pianotell/flarum-in-a-box
+docker rm -f flarum-in-a-box
+docker run -d -p 8080:80 --name flarum-in-a-box pianotell/flarum-in-a-box
+```
+
 ### Why?
 
 This makes it effortless for anyone to:
@@ -91,17 +99,14 @@ The container comes pre-configured with:
 - **Web server:** Nginx
 - **Database:** MariaDB (bundled, internal)
 - **Process manager:** supervisord (Nginx + PHP-FPM + MariaDB)
-- **Image size:** ~1.1 GB (disk), ~200 MB download
 - **Architectures:** amd64, arm64
-- **Source:** [github.com/PrimateCoder/flarum-in-a-box](https://github.com/PrimateCoder/flarum-in-a-box)
-- **Docker Hub:** [pianotell/flarum-in-a-box](https://hub.docker.com/r/pianotell/flarum-in-a-box)
-
-### Feedback Welcome!
-
-Is this useful to anyone?
 
 ### Links
 
 - [Source code on GitHub](https://github.com/PrimateCoder/flarum-in-a-box)
 - [Docker Hub](https://hub.docker.com/r/pianotell/flarum-in-a-box)
 - [Report an issue](https://github.com/PrimateCoder/flarum-in-a-box/issues)
+
+### Feedback Welcome!
+
+Is this useful to anyone at all?
