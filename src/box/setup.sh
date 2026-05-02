@@ -4,21 +4,21 @@
 set -e
 
 echo "==> Initializing MariaDB data directory..."
-mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null 2>&1
+mariadb-install-db --user=mysql --datadir=/var/lib/mysql > /dev/null 2>&1
 mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld
 
 echo "==> Starting MariaDB..."
-mysqld_safe &
+mariadbd-safe &
 for i in $(seq 1 30); do
-    if mysqladmin ping --silent 2>/dev/null; then break; fi
+    if mariadb-admin ping --silent 2>/dev/null; then break; fi
     if [ "$i" -eq 30 ]; then echo "ERROR: MariaDB failed to start"; exit 1; fi
     sleep 1
 done
 echo "    MariaDB is ready."
 
 # ── Create database and user ─────────────────────────────────────────
-mysql -u root -e "CREATE DATABASE flarum;"
-mysql -u root -e "GRANT ALL ON flarum.* TO 'flarum'@'localhost' IDENTIFIED BY 'flarum'; FLUSH PRIVILEGES;"
+mariadb -u root -e "CREATE DATABASE flarum;"
+mariadb -u root -e "GRANT ALL ON flarum.* TO 'flarum'@'localhost' IDENTIFIED BY 'flarum'; FLUSH PRIVILEGES;"
 
 # ── Install Flarum ───────────────────────────────────────────────────
 cd /var/www/html
@@ -96,7 +96,7 @@ done
 
 # ── Configure extension settings ─────────────────────────────────────
 echo "==> Configuring settings..."
-mysql -u root flarum -e "
+mariadb -u root flarum -e "
     INSERT INTO flarum_settings (\`key\`, value) VALUES
         ('fof-formatting.plugin.autoimage', '1'),
         ('fof-formatting.plugin.autovideo', '1'),
@@ -108,7 +108,7 @@ mysql -u root flarum -e "
 
 # ── Create sample tags ───────────────────────────────────────────────
 echo "==> Creating tags..."
-mysql -u root flarum -e "
+mariadb -u root flarum -e "
     INSERT INTO flarum_tags (id, name, slug, description, color, icon, is_primary, position) VALUES
         (2, 'Announcements', 'announcements', 'Official announcements and news', '#e74c3c', 'fas fa-bullhorn', 1, 1),
         (3, 'Support', 'support', 'Ask questions and get help', '#3498db', 'fas fa-life-ring', 1, 2),
@@ -121,7 +121,7 @@ mysql -u root flarum -e "
 "
 
 # ── Set permissions for guests ───────────────────────────────────────
-mysql -u root flarum -e "
+mariadb -u root flarum -e "
     INSERT IGNORE INTO flarum_group_permission (group_id, permission, created_at) VALUES
         (2, 'fof.gamification.viewRankingPage', NOW()),
         (2, 'searchUsers', NOW());
@@ -130,6 +130,7 @@ mysql -u root flarum -e "
 # ── Fix file permissions BEFORE starting web server ──────────────────
 # Some extensions (fof/rich-text) install files with restrictive perms
 # that prevent www-data from reading them. Must fix before starting nginx.
+echo "==> Fixing file permissions (recursive on vendor — may take ~30s)..."
 chown -R www-data:www-data /var/www/html/config.php /var/www/html/storage /var/www/html/public/assets
 chmod -R 775 /var/www/html/storage /var/www/html/public/assets
 find /var/www/html/vendor -user root -exec chown www-data:www-data {} \; 2>/dev/null
@@ -137,7 +138,7 @@ find /var/www/html/vendor -type d ! -perm -755 -exec chmod 755 {} \; 2>/dev/null
 
 # ── Seed demo content via API ────────────────────────────────────────
 echo "==> Seeding demo content..."
-mysql -u root flarum -e "
+mariadb -u root flarum -e "
     INSERT INTO flarum_api_keys (id, \`key\`, user_id, created_at)
     VALUES (1, 'build-seed-token', 1, NOW());
 "
@@ -183,13 +184,13 @@ post_discussion() {
 # Welcome post
 post_discussion \
     '"👋 Welcome to Flarum-In-A-Box!"' \
-    '"## 👋 Welcome to Flarum-In-A-Box!\n\n**Flarum-In-A-Box** is a ready-to-run, all-in-one Docker container from [🎹 Piano | Tell](https://pianotell.com) that gives you a fully working **Flarum 2.x** forum with ~50 extensions pre-installed. No setup, no configuration — just launch and go.\n\n### What is it good for?\n\n- 🧪 **Demo & Evaluation** — Quickly show off Flarum to stakeholders, clients, or your team without setting up a server\n- 💻 **Extension Development** — A clean, reproducible Flarum environment to build and test extensions against\n- 📚 **Learning & Experimentation** — Explore Flarum features, try out extensions, and learn how everything works\n- 🏗️ **Theme Development** — Test themes like the included **Avocado** theme in a real Flarum instance\n- 🎓 **Workshops & Training** — Spin up identical instances for every participant in minutes\n\n### Default Accounts\n\n| Account | Username | Password |\n|---------|----------|----------|\n| Admin | `admin` | `password` |\n| User | `user` | `password` |\n\nThe admin account has full access to the Admin Panel (click your avatar → Administration). New users can sign up without email confirmation.\n\n### Important Notes\n\n- ⚠️ This is a **demo/playground** — not intended for production use\n- 🔑 Change the default passwords if exposing this beyond localhost\n- 💾 Data persists across container restarts but is lost on `docker rm`\n- 🔄 To reset everything: `docker rm -f flarum-in-a-box` then run again\n\nHave fun exploring Flarum! 🚀"' \
+    '"## 👋 Welcome to Flarum-In-A-Box!\n\n**Flarum-In-A-Box** is a ready-to-run, all-in-one Docker container from [🎹 Piano | Tell](https://pianotell.com) that gives you a fully working **Flarum 2.x** forum with \\~50 extensions pre-installed. No setup, no configuration — just launch and go.\n\n### What is it good for?\n\n- 🧪 **Demo & Evaluation** — Quickly show off Flarum to stakeholders, clients, or your team without setting up a server\n- 💻 **Extension Development** — A clean, reproducible Flarum environment to build and test extensions against\n- 📚 **Learning & Experimentation** — Explore Flarum features, try out extensions, and learn how everything works\n- 🏗️ **Theme Development** — Test themes like the included **Avocado** theme in a real Flarum instance\n- 🎓 **Workshops & Training** — Spin up identical instances for every participant in minutes\n\n### Default Accounts\n\n| Account | Username | Password |\n|---------|----------|----------|\n| Admin | `admin` | `password` |\n| User | `user` | `password` |\n\nThe admin account has full access to the Admin Panel (click your avatar → Administration). New users can sign up without email confirmation.\n\n### Important Notes\n\n- ⚠️ This is a **demo/playground** — not intended for production use\n- 🔑 Change the default passwords if exposing this beyond localhost\n- 💾 Data persists across container restarts but is lost on `docker rm`\n- 🔄 To reset everything: `docker rm -f flarum-in-a-box` then run again\n\nHave fun exploring Flarum! 🚀"' \
     ""
 
 # Extensions guide
 post_discussion \
     '"Getting Started with Extensions"' \
-    '"## Extensions Guide\n\nThis instance comes with **~50 extensions** installed. Visit **Admin Panel → Extensions** to see and configure them all.\n\n### Enabled by Default\n\nCore: Tags, Likes, Mentions, Lock, Sticky, Suspend, Markdown, BBCode, Emoji, Flags, Nicknames, Subscriptions, Approval, Statistics\n\nCommunity favorites: **Flamoji** (emoji picker), **Upload**, **Polls**, **Best Answer**, **Byobu** (private discussions), **Drafts**, **Reactions**, **Rich Text**, **Gamification** (voting & rankings), **Profile Cover**, **Mobile Tab**, **Categories**, **Stickiest**, **Diff** (edit history), **Synopsis**, **Discussion Views**, **Impersonate**, **Split/Merge**, **Topic Rating**, **Post Search**, **Forum Widgets**, **Markdown Tables**, **Inline Audio**, and more.\n\n### Installed but Not Enabled\n\nSome extensions are installed but disabled by default — try them out!\n\n- 🥑 **Avocado** — A gorgeous green theme that transforms your forum (see the dedicated post about it!)\n- 🎨 **Colored** — Colorful usernames by group\n- 🦶 **Modern Footer** — Responsive footer\n- 🔤 **Font Sizer** — Adjustable font sizes\n- 📄 **FoF Pages** — Custom static pages\n- 🖼️ **FoF Discussion Thumbnail** — Thumbnails in discussion list\n- 🤝 **FoF Terms** — Terms of service acceptance\n- 📣 **FoF Share Social** — Social media sharing\n- 🛡️ **FoF Anti Spam** — Spam prevention\n\nEnable any of them from the Admin Panel → Extensions.\n\n### Installing More Extensions\n\nThe **Extension Manager** is enabled — search for and install additional extensions directly from the Admin Panel, no command line needed.\n\n### Feedback\n\nHave ideas or found a bug? Visit our [GitHub repository](https://github.com/PrimateCoder/flarum-in-a-box) to open an issue or contribute."' \
+    '"## Extensions Guide\n\nThis instance comes with **\\~50 extensions** installed. Visit **Admin Panel → Extensions** to see and configure them all.\n\n### Enabled by Default\n\nCore: Tags, Likes, Mentions, Lock, Sticky, Suspend, Markdown, BBCode, Emoji, Flags, Nicknames, Subscriptions, Approval, Statistics\n\nCommunity favorites: **Flamoji** (emoji picker), **Upload**, **Polls**, **Best Answer**, **Byobu** (private discussions), **Drafts**, **Reactions**, **Rich Text**, **Gamification** (voting & rankings), **Profile Cover**, **Mobile Tab**, **Categories**, **Stickiest**, **Diff** (edit history), **Synopsis**, **Discussion Views**, **Impersonate**, **Split/Merge**, **Topic Rating**, **Post Search**, **Forum Widgets**, **Markdown Tables**, **Inline Audio**, and more.\n\n### Installed but Not Enabled\n\nSome extensions are installed but disabled by default — try them out!\n\n- 🥑 **Avocado** — A gorgeous green theme that transforms your forum (see the dedicated post about it!)\n- 🎨 **Colored** — Colorful usernames by group\n- 🦶 **Modern Footer** — Responsive footer\n- 🔤 **Font Sizer** — Adjustable font sizes\n- 📄 **FoF Pages** — Custom static pages\n- 🖼️ **FoF Discussion Thumbnail** — Thumbnails in discussion list\n- 🤝 **FoF Terms** — Terms of service acceptance\n- 📣 **FoF Share Social** — Social media sharing\n- 🛡️ **FoF Anti Spam** — Spam prevention\n\nEnable any of them from the Admin Panel → Extensions.\n\n### Installing More Extensions\n\nThe **Extension Manager** is enabled — search for and install additional extensions directly from the Admin Panel, no command line needed.\n\n### Feedback\n\nHave ideas or found a bug? Visit our [GitHub repository](https://github.com/PrimateCoder/flarum-in-a-box) to open an issue or contribute."' \
     ""
 
 # Customization tips
@@ -239,14 +240,14 @@ else
 fi
 
 # Sticky welcome posts
-mysql -u root flarum -e "
+mariadb -u root flarum -e "
     UPDATE flarum_discussions SET is_sticky = 1
     WHERE title LIKE '%Welcome to Flarum-In-A-Box%'
        OR title LIKE '%Getting Started with Extensions%';
 "
 
 # ── Clean up: stop temp services and remove seed token ───────────────
-mysql -u root flarum -e "DELETE FROM flarum_api_keys WHERE id = 1;"
+mariadb -u root flarum -e "DELETE FROM flarum_api_keys WHERE id = 1;"
 nginx -s stop 2>/dev/null || true
 kill $(pidof php-fpm) 2>/dev/null || true
 for i in $(seq 1 10); do
@@ -255,6 +256,7 @@ for i in $(seq 1 10); do
 done
 
 # ── Re-fix permissions (API may have created root-owned files) ───────
+echo "==> Final permission sweep on vendor (recursive — may take ~30s)..."
 chown -R www-data:www-data /var/www/html/config.php /var/www/html/storage /var/www/html/public/assets
 chmod -R 775 /var/www/html/storage /var/www/html/public/assets
 find /var/www/html/vendor -user root -exec chown www-data:www-data {} \; 2>/dev/null
@@ -262,9 +264,9 @@ find /var/www/html/vendor -type d ! -perm -755 -exec chmod 755 {} \; 2>/dev/null
 
 # ── Shut down MariaDB cleanly (flush all InnoDB data to disk) ────────
 echo "==> Flushing and shutting down MariaDB..."
-mysql -u root -e "SET GLOBAL innodb_fast_shutdown = 0;"
-mysql -u root -e "FLUSH TABLES;"
-mysqladmin shutdown 2>/dev/null || true
+mariadb -u root -e "SET GLOBAL innodb_fast_shutdown = 0;"
+mariadb -u root -e "FLUSH TABLES;"
+mariadb-admin shutdown 2>/dev/null || true
 for i in $(seq 1 30); do
     if ! pidof mariadbd > /dev/null 2>&1; then break; fi
     sleep 1
