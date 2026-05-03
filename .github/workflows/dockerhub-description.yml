@@ -1,0 +1,22 @@
+name: Update Docker Hub README
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - README.md
+      - .github/workflows/dockerhub-description.yml
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: peter-evans/dockerhub-description@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: pianotell/flarum-in-a-box
+          short-description: "All-in-one Flarum 2.x demo container with ~50 extensions, MariaDB, and Nginx"
+          readme-filepath: README.md

@@ -5,9 +5,9 @@ One command to launch a fully working forum — from [🎹 Piano | Tell](https:/
 
 > ⚠️ **Demo/playground image** — fantastic for testing and development, but not for production. Data is ephemeral for the lifetime of the container.
 
-![Flarum-In-A-Box Homepage](docs/images/homepage.png)
+![Flarum-In-A-Box Homepage](https://raw.githubusercontent.com/PrimateCoder/flarum-in-a-box/main/docs/images/homepage.png)
 
-![Showcase Tag](docs/images/showcase.png)
+![Showcase Tag](https://raw.githubusercontent.com/PrimateCoder/flarum-in-a-box/main/docs/images/showcase.png)
 
 ## Quick Start
 
