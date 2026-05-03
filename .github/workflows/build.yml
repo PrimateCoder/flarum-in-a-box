@@ -10,6 +10,11 @@ on:
 env:
   IMAGE_NAME: pianotell/flarum-in-a-box
 
+# Cancel in-flight builds for the same ref (e.g. when a tag is force-pushed).
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
