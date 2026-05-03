@@ -85,8 +85,16 @@ RUN set -e; \
         fof/discussion-views \
         antoinefr/flarum-ext-bbcode-fa \
         sycho/flarum-move-posts \
-        sycho/flarum-profile-cover \
+        forumaker/profile-cover \
+        forumaker/magicslider \
+        forumaker/magicbb \
+        forumaker/magicread \
+        forumaker/yandex-oauth \
+        forumaker/yandex-smartcaptcha \
+        fof/oauth \
         acpl/mobile-tab \
+        justoverclock/flarum-ext-welcomebox \
+        ralkage/flarum-ext-profile-messages \
         ramon/avocado \
         ramon/colored \
         ekumanov/flarum-ext-post-search \

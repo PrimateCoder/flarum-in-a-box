@@ -37,7 +37,7 @@ This makes it effortless for anyone to:
 - 📚 **Learn and experiment** with features and extensions
 - 🏗️ **Test themes** like the included [Avocado](https://discuss.flarum.org/d/38940-avocado-theme) theme
 
-> ⚠️ This is a **demo/playground** image — not intended for production use but perfect for testing and development.
+> ⚠️ **Demo/playground image** — fantastic for testing and development, but not for production. Data is ephemeral for the lifetime of the container.
 
 ### What's Inside?
 
@@ -71,7 +71,7 @@ Tags, Likes, Mentions, Lock, Sticky, Suspend, Markdown, BBCode, Emoji, Flags, Ni
 - ...and many more (BBCode FA, Inline Audio, Forum Widgets, Markdown Tables, Post Search, Move Posts, etc.)
 
 **Installed but not enabled** (try them from Admin Panel → Extensions):
-- 🥑 [**Avocado**](https://discuss.flarum.org/d/38940-avocado-theme) — A gorgeous green theme
+- 🥑 [**Avocado**](https://discuss.flarum.org/d/38940-avocado-theme) — A modern, polished theme with hero banner and rich customization
 - 🎨 **Colored** — Colorful usernames by group
 - 🦶 **Modern Footer** — Responsive footer
 - 🔤 **Font Sizer** — Adjustable font sizes
