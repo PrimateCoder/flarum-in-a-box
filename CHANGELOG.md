@@ -2,6 +2,11 @@
 
 All notable changes to Flarum-In-A-Box are documented here.
 
+## 0.2.5
+
+### Fixed
+- Extension Manager now has the write access it needs on `composer.json`, `composer.lock`, `vendor/`, `storage/`, and `storage/.composer`.
+
 ## 0.2.4
 
 ### Fixed

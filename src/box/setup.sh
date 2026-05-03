@@ -133,10 +133,18 @@ mariadb -u root flarum -e "
 # ── Fix file permissions BEFORE starting web server ──────────────────
 # Some extensions (fof/rich-text) install files with restrictive perms
 # that prevent www-data from reading them. Must fix before starting nginx.
+# Extension Manager also needs write access on composer.json, composer.lock,
+# vendor/, storage/, and storage/.composer.
 echo "==> Fixing file permissions (recursive on vendor — may take ~30s)..."
-chown -R www-data:www-data /var/www/html/config.php /var/www/html/storage /var/www/html/public/assets
+mkdir -p /var/www/html/storage/.composer
+chown -R www-data:www-data \
+    /var/www/html/config.php \
+    /var/www/html/composer.json \
+    /var/www/html/composer.lock \
+    /var/www/html/vendor \
+    /var/www/html/storage \
+    /var/www/html/public/assets
 chmod -R 775 /var/www/html/storage /var/www/html/public/assets
-find /var/www/html/vendor -user root -exec chown www-data:www-data {} \; 2>/dev/null
 find /var/www/html/vendor -type d ! -perm -755 -exec chmod 755 {} \; 2>/dev/null
 
 # ── Seed demo content via API ────────────────────────────────────────
@@ -260,9 +268,14 @@ done
 
 # ── Re-fix permissions (API may have created root-owned files) ───────
 echo "==> Final permission sweep on vendor (recursive — may take ~30s)..."
-chown -R www-data:www-data /var/www/html/config.php /var/www/html/storage /var/www/html/public/assets
+chown -R www-data:www-data \
+    /var/www/html/config.php \
+    /var/www/html/composer.json \
+    /var/www/html/composer.lock \
+    /var/www/html/vendor \
+    /var/www/html/storage \
+    /var/www/html/public/assets
 chmod -R 775 /var/www/html/storage /var/www/html/public/assets
-find /var/www/html/vendor -user root -exec chown www-data:www-data {} \; 2>/dev/null
 find /var/www/html/vendor -type d ! -perm -755 -exec chmod 755 {} \; 2>/dev/null
 
 # ── Shut down MariaDB cleanly (flush all InnoDB data to disk) ────────
