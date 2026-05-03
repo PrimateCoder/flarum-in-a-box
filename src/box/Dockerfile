@@ -1,5 +1,5 @@
 # Flarum-in-a-Box: All-in-one Docker container
-# Bundles Flarum 2.x + MariaDB + Nginx + PHP-FPM in a minimal Alpine image.
+# Bundles Flarum 2.x + MariaDB + nginx + PHP-FPM in a minimal Alpine image.
 #
 # Multi-stage build: builder stage compiles PHP extensions and installs
 # Flarum + extensions via Composer; final stage has only runtime deps.
@@ -40,9 +40,6 @@ RUN composer create-project flarum/flarum:^2.0 /var/www/html \
         --prefer-dist \
         --no-interaction \
         --no-dev
-
-# Remove Realtime/Pusher (requires external service)
-RUN composer remove flarum/realtime --no-interaction --update-no-dev 2>/dev/null || true
 
 # Allow dev/beta extensions
 RUN composer config minimum-stability dev \
@@ -146,7 +143,7 @@ COPY --from=builder /var/www/html /var/www/html
 # Copy Composer (needed for Extension Manager at runtime)
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# ── Nginx configuration ──────────────────────────────────────────────
+# ── nginx configuration ──────────────────────────────────────────────
 RUN mkdir -p /run/nginx
 COPY src/box/nginx.conf /etc/nginx/http.d/default.conf
 

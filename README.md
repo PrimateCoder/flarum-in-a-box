@@ -1,6 +1,6 @@
 # 📦 Flarum-In-A-Box
 
-All-in-one Docker container with **Flarum 2.x**, ~50 extensions, MariaDB, and Nginx.
+All-in-one Docker container with **Flarum 2.x**, ~50 extensions, MariaDB, and nginx.
 One command to launch a fully working forum — from [🎹 Piano | Tell](https://pianotell.com).
 
 > ⚠️ **Demo/playground image** — fantastic for testing and development, but not for production. Data is ephemeral for the lifetime of the container.
@@ -68,6 +68,19 @@ docker cp my-logo.png flarum-in-a-box:/var/www/html/public/assets/
 docker cp flarum-in-a-box:/var/www/html/config.php ./config.php
 ```
 
+View container logs (nginx, PHP-FPM, MariaDB, s6-overlay):
+
+```bash
+# All logs
+docker logs flarum-in-a-box
+
+# Follow live
+docker logs -f flarum-in-a-box
+
+# Last 100 lines
+docker logs --tail 100 flarum-in-a-box
+```
+
 ## What's Included
 
 ### Flarum Core (bundled)
@@ -100,7 +113,7 @@ Approval, BBCode, Markdown, Statistics, Nicknames.
 - **FoF Linguist** — Customize translations
 - **Forumaker Profile Cover** — Cover images on profiles (with GIF/WebP support)
 - **Forumaker MagicSlider** — Image slider in posts
-- **Forumaker MagicBB** — Extended BBCode toolkit
+- **Forumaker MagicRead** — Reading progress / scroll tracking
 - **Profile Messages** — Public messages on user profiles (XenForo-style)
 - **Mobile Tab** — Bottom navigation on mobile
 - **Move Posts** — Move posts between discussions
@@ -119,7 +132,7 @@ Approval, BBCode, Markdown, Statistics, Nicknames.
 - **Colored** — Colored usernames by group
 - **Modern Footer** — Responsive forum footer
 - **Font Sizer** — Adjustable font sizes
-- **Forumaker MagicRead** — Reading progress / scroll tracking
+- **Forumaker MagicBB** — Extended BBCode toolkit
 - **Forumaker Yandex OAuth** — Yandex ID login (requires FoF OAuth + setup)
 - **Forumaker Yandex SmartCaptcha** — Yandex CAPTCHA for signup
 - **FoF OAuth** — Social login framework (Google, Discord, GitHub, etc.)

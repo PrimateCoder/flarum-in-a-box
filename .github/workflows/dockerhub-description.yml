@@ -18,5 +18,5 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           repository: pianotell/flarum-in-a-box
-          short-description: "All-in-one Flarum 2.x demo container with ~50 extensions, MariaDB, and Nginx"
+          short-description: "All-in-one Flarum 2.x demo container with ~50 extensions, MariaDB, and nginx"
           readme-filepath: README.md

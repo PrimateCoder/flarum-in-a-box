@@ -51,7 +51,7 @@ This makes it effortless for anyone to:
 
 ### What's Inside?
 
-**PHP 8.5** on Alpine Linux, with **Nginx**, **MariaDB**, and **s6-overlay** — all in a single container. Multi-arch (amd64 + arm64), so it runs on Intel PCs, Apple Silicon Macs, and ARM cloud instances.
+**PHP 8.5** on Alpine Linux, with **nginx**, **MariaDB**, and **s6-overlay** — all in a single container. Multi-arch (amd64 + arm64), so it runs on Intel PCs, Apple Silicon Macs, and ARM cloud instances.
 
 #### ~50 Extensions Pre-Installed
 
@@ -74,7 +74,7 @@ Tags, Likes, Mentions, Lock, Sticky, Suspend, Markdown, BBCode, Emoji, Flags, Ni
 - **FoF Split / Merge** — Discussion management
 - **Forumaker Profile Cover** — Cover images on profiles (with GIF/WebP support)
 - **Forumaker MagicSlider** — Image slider in posts
-- **Forumaker MagicBB** — Extended BBCode toolkit
+- **Forumaker MagicRead** — Reading progress / scroll tracking
 - **Profile Messages** — Public messages on user profiles (XenForo-style)
 - **Mobile Tab** — Bottom navigation on mobile
 - **Stickiest** — Three-tier sticky system
@@ -89,7 +89,7 @@ Tags, Likes, Mentions, Lock, Sticky, Suspend, Markdown, BBCode, Emoji, Flags, Ni
 - 🎨 **Colored** — Colorful usernames by group
 - 🦶 **Modern Footer** — Responsive footer
 - 🔤 **Font Sizer** — Adjustable font sizes
-- 📖 **Forumaker MagicRead** — Reading progress / scroll tracking
+- 🧰 **Forumaker MagicBB** — Extended BBCode toolkit (extra composer icons)
 - 👋 **WelcomeBox** — Customizable welcome banner
 - And several FoF utilities (Terms, Pages, Share Social, Discussion Thumbnail, Anti Spam)
 
@@ -130,9 +130,9 @@ docker cp flarum-in-a-box:/var/www/html/config.php ./config.php
 ### Technical Details
 
 - **Base:** PHP 8.5-FPM on Alpine Linux (multi-stage build)
-- **Web server:** Nginx
+- **Web server:** nginx
 - **Database:** MariaDB (bundled, internal)
-- **Process manager:** s6-overlay (Nginx + PHP-FPM + MariaDB)
+- **Process manager:** s6-overlay (nginx + PHP-FPM + MariaDB)
 - **Architectures:** amd64, arm64
 
 ### Links

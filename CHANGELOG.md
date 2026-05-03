@@ -2,6 +2,11 @@
 
 All notable changes to Flarum-In-A-Box are documented here.
 
+## 0.2.7
+
+- Disabled `forumaker/magicbb` by default
+- Enabled `forumaker/magicread` by default
+
 ## 0.2.6
 
 ### Changed
@@ -41,4 +46,4 @@ All notable changes to Flarum-In-A-Box are documented here.
 ## 0.2.0
 
 ### Added
-- Initial release: all-in-one Docker container with Flarum 2.x, ~50 extensions, MariaDB, and Nginx
+- Initial release: all-in-one Docker container with Flarum 2.x, ~50 extensions, MariaDB, and nginx

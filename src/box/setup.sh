@@ -78,7 +78,7 @@ ENABLE_EXTENSIONS="
     sycho-move-posts
     forumaker-profile-cover
     forumaker-magicslider
-    forumaker-magicbb
+    forumaker-magicread
     acpl-mobile-tab
     ralkage-profile-messages
     ekumanov-post-search
@@ -154,7 +154,7 @@ mariadb -u root flarum -e "
     VALUES (1, 'build-seed-token', 1, NOW());
 "
 
-echo "    Starting PHP-FPM and Nginx..."
+echo "    Starting PHP-FPM and nginx..."
 php-fpm --daemonize
 nginx
 echo "    Waiting for HTTP..."
