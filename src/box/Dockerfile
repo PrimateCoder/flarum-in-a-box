@@ -155,9 +155,10 @@ COPY src/box/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY src/box/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# ── MariaDB socket config ────────────────────────────────────────────
+# ── MariaDB socket + PHP memory config ────────────────────────────────
 RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld \
-    && echo "pdo_mysql.default_socket = /run/mysqld/mysqld.sock" > /usr/local/etc/php/conf.d/mariadb-socket.ini
+    && echo "pdo_mysql.default_socket = /run/mysqld/mysqld.sock" > /usr/local/etc/php/conf.d/mariadb-socket.ini \
+    && echo "memory_limit = 512M" > /usr/local/etc/php/conf.d/flarum-memory.ini
 
 # ── Build-time setup: install Flarum, enable extensions, seed content ─
 # This runs MariaDB temporarily during build to pre-populate everything.

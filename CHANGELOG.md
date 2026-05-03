@@ -2,6 +2,11 @@
 
 All notable changes to Flarum-In-A-Box are documented here.
 
+## 0.2.4
+
+### Fixed
+- Sporadic 500 errors on the front page caused by PHP-FPM running out of memory when compiling LESS (Avocado + ~40 extensions). Bumped `memory_limit` from 128M to 512M.
+
 ## 0.2.3
 
 ### Added

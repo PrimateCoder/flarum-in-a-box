@@ -1,4 +1,6 @@
-📦 Flarum-In-A-Box — Try Flarum 2.x in One Command with Docker
+# Title: 📦 Flarum-In-A-Box — Try Flarum 2.x in One Command (Docker)
+
+---
 
 ## 📦 Flarum-In-A-Box
 
@@ -6,7 +8,9 @@
 
 Inspired by the [discussion about demo sites](https://discuss.flarum.org/d/39142-flarum-official-demo-sites-usage-update) + the fact that [PianoTell](https://forum.pianotell.com) itself is [already on Docker](https://forum.pianotell.com/d/785-piano-tell-hosting-updates), I built [**Flarum-In-A-Box**](https://github.com/PrimateCoder/flarum-in-a-box) — an all-in-one Docker container that gives you a complete Flarum 2.x forum with ~50 popular extensions pre-installed. No server setup, no configuration, no database provisioning.
 
-Now everyone can have admin access and customize Flarum 2.x at will in the comfort and safety of Flarum-In-A-Box:
+Now everyone can have admin access and customize Flarum 2.x at will in the comfort and safety of Flarum-In-A-Box.
+
+### Quick Start
 
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 2. Search for `pianotell/flarum-in-a-box`
@@ -28,6 +32,12 @@ docker rm -f flarum-in-a-box
 docker run -d -p 8080:80 --name flarum-in-a-box pianotell/flarum-in-a-box
 ```
 
+### Screenshots
+
+![Homepage](https://raw.githubusercontent.com/PrimateCoder/flarum-in-a-box/main/docs/images/homepage.png)
+
+![Showcase](https://raw.githubusercontent.com/PrimateCoder/flarum-in-a-box/main/docs/images/showcase.png)
+
 ### Why?
 
 This makes it effortless for anyone to:
@@ -37,7 +47,7 @@ This makes it effortless for anyone to:
 - 📚 **Learn and experiment** with features and extensions
 - 🏗️ **Test themes** like the included [Avocado](https://discuss.flarum.org/d/38940-avocado-theme) theme
 
-> ⚠️ **Demo/playground image** — fantastic for testing and development, but not for production. Data is ephemeral for the lifetime of the container.
+> ⚠️ This is a **demo/playground** image — not intended for production use but perfect for testing and development. Data is ephemeral for the lifetime of the container.
 
 ### What's Inside?
 
@@ -62,7 +72,10 @@ Tags, Likes, Mentions, Lock, Sticky, Suspend, Markdown, BBCode, Emoji, Flags, Ni
 - **FoF Categories** — Category-based navigation
 - **FoF Impersonate** — Log in as any user (great for demos!)
 - **FoF Split / Merge** — Discussion management
-- **Profile Cover** — Cover images on user profiles
+- **Forumaker Profile Cover** — Cover images on profiles (with GIF/WebP support)
+- **Forumaker MagicSlider** — Image slider in posts
+- **Forumaker MagicBB** — Extended BBCode toolkit
+- **Profile Messages** — Public messages on user profiles (XenForo-style)
 - **Mobile Tab** — Bottom navigation on mobile
 - **Stickiest** — Three-tier sticky system
 - **Diff** — Post edit history
@@ -71,10 +84,13 @@ Tags, Likes, Mentions, Lock, Sticky, Suspend, Markdown, BBCode, Emoji, Flags, Ni
 - ...and many more (BBCode FA, Inline Audio, Forum Widgets, Markdown Tables, Post Search, Move Posts, etc.)
 
 **Installed but not enabled** (try them from Admin Panel → Extensions):
+
 - 🥑 [**Avocado**](https://discuss.flarum.org/d/38940-avocado-theme) — A modern, polished theme with hero banner and rich customization
 - 🎨 **Colored** — Colorful usernames by group
 - 🦶 **Modern Footer** — Responsive footer
 - 🔤 **Font Sizer** — Adjustable font sizes
+- 📖 **Forumaker MagicRead** — Reading progress / scroll tracking
+- 👋 **WelcomeBox** — Customizable welcome banner
 - And several FoF utilities (Terms, Pages, Share Social, Discussion Thumbnail, Anti Spam)
 
 ### Ready Out of the Box
@@ -87,11 +103,29 @@ The container comes pre-configured with:
 - **Email auto-verified** on signup — no mail server needed
 - **Rankings page** accessible to everyone
 
-### Screenshots
+### Tips & Tricks
 
-![Homepage](https://raw.githubusercontent.com/PrimateCoder/flarum-in-a-box/main/docs/images/homepage.png)
+Run Flarum CLI commands directly from the host:
 
-![Showcase](https://raw.githubusercontent.com/PrimateCoder/flarum-in-a-box/main/docs/images/showcase.png)
+```bash
+docker exec flarum-in-a-box php flarum info
+```
+
+Get a shell inside the container (to run Composer, edit files, etc.):
+
+```bash
+docker exec -it flarum-in-a-box /bin/sh
+```
+
+Copy files to and from the container:
+
+```bash
+# Host → container
+docker cp my-logo.png flarum-in-a-box:/var/www/html/public/assets/
+
+# Container → host
+docker cp flarum-in-a-box:/var/www/html/config.php ./config.php
+```
 
 ### Technical Details
 
@@ -103,6 +137,7 @@ The container comes pre-configured with:
 
 ### Links
 
+- [Changelog](https://github.com/PrimateCoder/flarum-in-a-box/blob/main/CHANGELOG.md)
 - [Source code on GitHub](https://github.com/PrimateCoder/flarum-in-a-box)
 - [Docker Hub](https://hub.docker.com/r/pianotell/flarum-in-a-box)
 - [Report an issue](https://github.com/PrimateCoder/flarum-in-a-box/issues)
