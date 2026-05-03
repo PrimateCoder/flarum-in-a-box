@@ -51,7 +51,7 @@ This makes it effortless for anyone to:
 
 ### What's Inside?
 
-**PHP 8.5** on Alpine Linux, with **Nginx**, **MariaDB**, and **supervisord** — all in a single container. Multi-arch (amd64 + arm64), so it runs on Intel PCs, Apple Silicon Macs, and ARM cloud instances.
+**PHP 8.5** on Alpine Linux, with **Nginx**, **MariaDB**, and **s6-overlay** — all in a single container. Multi-arch (amd64 + arm64), so it runs on Intel PCs, Apple Silicon Macs, and ARM cloud instances.
 
 #### ~50 Extensions Pre-Installed
 
@@ -132,7 +132,7 @@ docker cp flarum-in-a-box:/var/www/html/config.php ./config.php
 - **Base:** PHP 8.5-FPM on Alpine Linux (multi-stage build)
 - **Web server:** Nginx
 - **Database:** MariaDB (bundled, internal)
-- **Process manager:** supervisord (Nginx + PHP-FPM + MariaDB)
+- **Process manager:** s6-overlay (Nginx + PHP-FPM + MariaDB)
 - **Architectures:** amd64, arm64
 
 ### Links

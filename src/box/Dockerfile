@@ -132,13 +132,13 @@ LABEL org.opencontainers.image.source="https://github.com/PrimateCoder/flarum-in
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN install-php-extensions pdo_mysql gd zip intl exif
 
-# Runtime dependencies
+# Runtime dependencies (no python — using s6-overlay instead of supervisord)
 RUN apk add --no-cache \
         nginx \
         mariadb \
         mariadb-client \
-        supervisor \
-        curl
+        curl \
+        s6-overlay
 
 # Copy Flarum application from builder
 COPY --from=builder /var/www/html /var/www/html
@@ -150,8 +150,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN mkdir -p /run/nginx
 COPY src/box/nginx.conf /etc/nginx/http.d/default.conf
 
-# ── Copy config files ────────────────────────────────────────────────
-COPY src/box/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# ── s6-overlay service definitions ───────────────────────────────────
+COPY src/box/s6-rc.d/ /etc/s6-overlay/s6-rc.d/
+
+# ── Entrypoint script (URL override, then chains to s6-overlay /init) ─
 COPY src/box/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
@@ -170,5 +172,6 @@ RUN chmod +x /tmp/setup.sh && /tmp/setup.sh && rm -f /tmp/setup.sh
 EXPOSE 80
 
 # ── Entrypoint & command ─────────────────────────────────────────────
+# entrypoint.sh handles URL override, then exec's /init (s6-overlay).
 ENTRYPOINT ["entrypoint.sh"]
-CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/init"]

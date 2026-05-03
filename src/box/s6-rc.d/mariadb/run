@@ -1,0 +1,6 @@
+#!/usr/bin/execlineb -P
+foreground { mkdir -p /run/mysqld }
+foreground { chown mysql:mysql /run/mysqld }
+s6-setuidgid mysql
+fdmove -c 2 1
+/usr/bin/mariadbd-safe

@@ -2,15 +2,20 @@
 
 All notable changes to Flarum-In-A-Box are documented here.
 
+## 0.2.6
+
+### Changed
+- Switched from supervisord to s6-overlay (drops Python from the image)
+
 ## 0.2.5
 
 ### Fixed
-- Extension Manager now has the write access it needs on `composer.json`, `composer.lock`, `vendor/`, `storage/`, and `storage/.composer`.
+- Extension Manager write permissions
 
 ## 0.2.4
 
 ### Fixed
-- Sporadic 500 errors on the front page caused by PHP-FPM running out of memory when compiling LESS (Avocado + ~40 extensions). Bumped `memory_limit` from 128M to 512M.
+- Sporadic 500 errors on the front page (raised PHP memory limit)
 
 ## 0.2.3
 
