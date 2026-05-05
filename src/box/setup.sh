@@ -45,6 +45,9 @@ YAML
 php flarum install --file=/tmp/flarum-install.yaml
 rm -f /tmp/flarum-install.yaml
 
+# (config.php is overwritten by the Dockerfile after this script finishes —
+# our shipped src/box/config.php has dynamic URL detection, see that file.)
+
 # ── Enable extensions ────────────────────────────────────────────────
 echo "==> Enabling extensions..."
 ENABLE_EXTENSIONS="
@@ -75,7 +78,7 @@ ENABLE_EXTENSIONS="
     fof-bbcode-details
     fof-discussion-views
     antoinefr-bbcode-fa
-    sycho-move-posts
+    fof-move-posts
     forumaker-profile-cover
     forumaker-magicslider
     forumaker-magicread

@@ -2,6 +2,12 @@
 
 All notable changes to Flarum-In-A-Box are documented here.
 
+## 0.2.8
+
+- Auto-detect forum URL from request host (`FLARUM_FORUM_URL` still wins; honors `X-Forwarded-Proto`/`Host`)
+- Switched database driver from `mysql` to `mariadb`
+- Replaced `sycho/move-posts` with `fof/move-posts`
+
 ## 0.2.7
 
 - Disabled `forumaker/magicbb` by default

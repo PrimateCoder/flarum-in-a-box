@@ -81,7 +81,7 @@ RUN set -e; \
         fof/bbcode-details \
         fof/discussion-views \
         antoinefr/flarum-ext-bbcode-fa \
-        sycho/flarum-move-posts \
+        fof/move-posts \
         forumaker/profile-cover \
         forumaker/magicslider \
         forumaker/magicbb \
@@ -165,10 +165,20 @@ RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld \
 COPY src/box/setup.sh /tmp/setup.sh
 RUN chmod +x /tmp/setup.sh && /tmp/setup.sh && rm -f /tmp/setup.sh
 
+# Overwrite install's static config.php with our version — same DB credentials
+# but with a dynamic url closure (see src/box/config.php for details).
+COPY --chown=www-data:www-data --chmod=644 src/box/config.php /var/www/html/config.php
+
 # ── Ports ─────────────────────────────────────────────────────────────
 EXPOSE 80
 
+# ── Configurable env vars (advertised via image metadata) ────────────
+# Forum URL is auto-detected per-request from $_SERVER. Override here to pin
+# a specific URL (useful behind reverse proxies, when serving from a path,
+# or to harden against spoofed Host headers).
+ENV FLARUM_FORUM_URL=""
+
 # ── Entrypoint & command ─────────────────────────────────────────────
-# entrypoint.sh handles URL override, then exec's /init (s6-overlay).
+# entrypoint.sh prints a banner, then exec's /init (s6-overlay).
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["/init"]
