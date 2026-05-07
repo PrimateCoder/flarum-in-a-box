@@ -1,3 +1,11 @@
+# This file is part of pianotell/flarum-in-a-box.
+#
+# Copyright (c) 2026 Navindra Umanee
+#
+# LICENSE: For the full copyright and license information,
+# please view the LICENSE file that was distributed
+# with this source code.
+
 # Flarum-in-a-Box: All-in-one Docker container
 # Bundles Flarum 2.x + MariaDB + nginx + PHP-FPM in a minimal Alpine image.
 #
@@ -161,9 +169,14 @@ RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld \
 
 # ── Build-time setup: install Flarum, enable extensions, seed content ─
 # This runs MariaDB temporarily during build to pre-populate everything.
-# The resulting data directory is baked into the image layer.
+# Content (extension list, settings, tags, sample discussions) lives under
+# src/box/data/. PHP helpers under src/box/scripts/ import the data via
+# prepared statements / Flarum's HTTP API. setup.sh is the orchestrator.
+# Everything in /tmp/data and /tmp/scripts is removed at the end of setup.sh.
+COPY src/box/data /tmp/data
+COPY src/box/scripts /tmp/scripts
 COPY src/box/setup.sh /tmp/setup.sh
-RUN chmod +x /tmp/setup.sh && /tmp/setup.sh && rm -f /tmp/setup.sh
+RUN chmod +x /tmp/setup.sh && /tmp/setup.sh && rm -rf /tmp/setup.sh /tmp/data /tmp/scripts
 
 # Overwrite install's static config.php with our version — same DB credentials
 # but with a dynamic url closure (see src/box/config.php for details).

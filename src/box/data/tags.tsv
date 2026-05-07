@@ -1,0 +1,21 @@
+# Sample tags created on first boot.
+# Format: TSV with header row, one tag per line.
+# Columns: id, name, slug, description, color, icon, is_primary, position
+#   - id        : integer; explicit so seed discussions can be reasoned about
+#                 (note: upstream Flarum Tags seeds a "General" tag at id=1, so
+#                 our IDs start at 2)
+#   - name      : display name
+#   - slug      : URL slug (also how seed discussions reference tags)
+#   - color     : hex (with leading #)
+#   - is_primary: 1 = appears in main category list, 0 = secondary tag
+#   - position  : order among primary tags; use \N for NULL on secondary tags
+# Imported by scripts/import-tabular.php using PDO prepared statements.
+
+id	name	slug	description	color	icon	is_primary	position
+2	Announcements	announcements	Official announcements and news	#e74c3c	fas fa-bullhorn	1	1
+3	Support	support	Ask questions and get help	#3498db	fas fa-life-ring	1	2
+4	Feedback	feedback	Share ideas, suggestions, and feature requests	#2ecc71	fas fa-comment-dots	1	3
+5	Showcase	showcase	Show off what you have built	#9b59b6	fas fa-star	1	4
+6	Off-Topic	off-topic	Chat about anything and everything	#f39c12	fas fa-coffee	1	5
+7	Guides	guides	Tutorials, how-tos, and documentation	#1abc9c	fas fa-book	0	\N
+8	Bugs	bugs	Report issues and bugs	#e67e22	fas fa-bug	0	\N

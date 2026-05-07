@@ -1,4 +1,13 @@
 #!/bin/sh
+#
+# This file is part of pianotell/flarum-in-a-box.
+#
+# Copyright (c) 2026 Navindra Umanee
+#
+# LICENSE: For the full copyright and license information,
+# please view the LICENSE file that was distributed
+# with this source code.
+
 set -e
 
 # ── Ensure MariaDB runtime directory exists ──────────────────────────

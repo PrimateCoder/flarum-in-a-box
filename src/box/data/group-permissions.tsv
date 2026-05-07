@@ -1,0 +1,9 @@
+# Group permissions to grant on first boot.
+# Format: group_id<TAB>permission (single tab separator).
+# Lines starting with # and blank lines are ignored.
+# Group IDs: 1=Admin, 2=Guest, 3=Member, 4=Mod
+# Imported by scripts/import-tabular.php using PDO prepared statements.
+
+group_id	permission
+2	fof.gamification.viewRankingPage
+2	searchUsers

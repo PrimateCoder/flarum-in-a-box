@@ -1,0 +1,56 @@
+# Extensions to enable on first boot.
+# One extension ID per line. Lines starting with # and blank lines are ignored.
+# Extension IDs use dashes (e.g. fof-best-answer), NOT slashes — they are what
+# `php flarum extension:enable <id>` expects.
+#
+# To install a new extension:
+#   1. Add the composer package name to src/box/Dockerfile EXTENSIONS list
+#   2. Add the corresponding extension ID here to enable it by default
+#   3. (or omit here to leave it installed-but-disabled)
+
+flarum-extension-manager
+pianotell-flamoji
+
+# Friends of Flarum
+fof-best-answer
+fof-byobu
+fof-drafts
+fof-follow-tags
+fof-formatting
+fof-polls
+fof-upload
+fof-user-bio
+fof-user-directory
+fof-ignore-users
+fof-linguist
+fof-categories
+fof-links
+fof-sitemap
+fof-frontpage
+fof-gamification
+fof-moderator-notes
+fof-reactions
+fof-synopsis
+fof-impersonate
+fof-split
+fof-merge-discussions
+fof-bbcode-details
+fof-discussion-views
+fof-move-posts
+fof-rich-text
+
+# Other community
+antoinefr-bbcode-fa
+forumaker-profile-cover
+forumaker-magicslider
+forumaker-magicread
+acpl-mobile-tab
+ralkage-profile-messages
+ekumanov-post-search
+ekumanov-forum-widgets
+ekumanov-markdown-tables
+ekumanov-inline-audio
+tryhackx-topic-rating
+huseyinfiliz-stickiest
+huseyinfiliz-diff
+linkrobins-auto-verify

@@ -1,0 +1,11 @@
+# Flarum settings to apply on first boot.
+# Format: key<TAB>value (single tab separator).
+# Lines starting with # and blank lines are ignored.
+# Imported by scripts/import-tabular.php using PDO prepared statements
+# (so values may safely contain quotes, semicolons, etc.).
+
+fof-formatting.plugin.autoimage	1
+fof-formatting.plugin.autovideo	1
+fof-formatting.plugin.mediaembed	1
+fof-drafts.enable_scheduled_drafts	0
+mail_driver	log

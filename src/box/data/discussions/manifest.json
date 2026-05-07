@@ -1,0 +1,42 @@
+[
+    {
+        "file": "01-welcome.md",
+        "title": "👋 Welcome to Flarum-In-A-Box!",
+        "sticky": true
+    },
+    {
+        "file": "02-extensions-guide.md",
+        "title": "Getting Started with Extensions",
+        "sticky": true
+    },
+    {
+        "file": "03-customization-tips.md",
+        "title": "Tips for Customizing Your Forum",
+        "tag": "guides"
+    },
+    {
+        "file": "04-how-to-create-a-poll.md",
+        "title": "How to Create a Poll",
+        "tag": "guides"
+    },
+    {
+        "file": "05-feature-requests.md",
+        "title": "What features would you like to see?",
+        "tag": "feedback"
+    },
+    {
+        "file": "06-try-the-emoji-picker.md",
+        "title": "Try the Emoji Picker! 🎉",
+        "tag": "showcase"
+    },
+    {
+        "file": "07-coffee-break.md",
+        "title": "Coffee break ☕ — What are you working on?",
+        "tag": "off-topic"
+    },
+    {
+        "file": "08-avocado-theme.md",
+        "title": "🥑 Try the Avocado Theme!",
+        "tag": "showcase"
+    }
+]
