@@ -1,0 +1,23 @@
+# Sample user accounts created on first boot.
+# Format: TSV with header row.
+#   - username  : login name
+#   - email     : email address (auto-confirmed; no real mail sent)
+#   - password  : login password (all sample accounts use 'password')
+#   - groups    : comma-separated group IDs to add the user to
+#                 (1=Admin, 2=Guest [auto], 3=Member [auto], 4=Mod)
+#                 Members of group 3 (Member) are added automatically by
+#                 Flarum, so listing additional groups (like 4=Mod) here
+#                 layers on top of the default Member membership.
+# Note: 'admin' is created during `php flarum install` from install.yaml,
+# so it is NOT listed here.
+# Imported by scripts/seed-discussions.php (also referenced as authors of
+# replies in discussions/manifest.json).
+
+username	email	password	groups
+user	user@example.com	password	
+moderator	moderator@example.com	password	4
+user1	user1@example.com	password	
+user2	user2@example.com	password	
+user3	user3@example.com	password	
+user4	user4@example.com	password	
+user5	user5@example.com	password	

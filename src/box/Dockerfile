@@ -41,88 +41,31 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install Flarum
+# Install Flarum + extensions in one shot.
+#
+#   1. `composer create-project flarum/flarum --no-install` scaffolds the
+#      project structure (config files, public/index.php, etc.) without
+#      pulling any deps.
+#   2. We replace the generated composer.json with our hand-managed
+#      template (src/box/composer.json.TEMPLATE) listing every package we
+#      want — both core flarum/* extensions and the community ones.
+#   3. A single `composer install` resolves all deps at once. This gives
+#      composer the full picture for conflict resolution and is much
+#      faster than ~50 sequential `composer require` calls.
+#
+# Trade-off: a single broken extension fails the whole build (vs the old
+# loop that skipped failures). When that happens, move the offender into
+# the composer.json.TEMPLATE "_disabled-require" parking lot and rebuild.
 WORKDIR /var/www/html
-RUN composer create-project flarum/flarum:^2.0 /var/www/html \
+RUN composer create-project flarum/flarum:^2.0 . \
         --stability=beta \
         --prefer-dist \
         --no-interaction \
-        --no-dev
-
-# Allow dev/beta extensions
-RUN composer config minimum-stability dev \
-    && composer config prefer-stable true
-
-# Install extensions one-by-one (failures skipped gracefully)
-RUN set -e; \
-    EXTENSIONS=" \
-        flarum/extension-manager \
-        flarum/nicknames \
-        pianotell/flarum-ext-flamoji \
-        fof/best-answer \
-        fof/byobu \
-        fof/drafts \
-        fof/follow-tags \
-        fof/formatting \
-        fof/polls \
-        fof/upload \
-        fof/user-bio \
-        fof/user-directory \
-        fof/ignore-users \
-        fof/linguist \
-        fof/categories \
-        fof/links \
-        fof/pages \
-        fof/sitemap \
-        fof/frontpage \
-        fof/gamification \
-        fof/moderator-notes \
-        fof/terms \
-        fof/anti-spam \
-        fof/reactions \
-        fof/share-social \
-        fof/synopsis \
-        fof/discussion-thumbnail \
-        fof/impersonate \
-        fof/split \
-        fof/merge-discussions \
-        fof/bbcode-details \
-        fof/discussion-views \
-        antoinefr/flarum-ext-bbcode-fa \
-        fof/move-posts \
-        forumaker/profile-cover \
-        forumaker/magicslider \
-        forumaker/magicbb \
-        forumaker/magicread \
-        forumaker/yandex-oauth \
-        forumaker/yandex-smartcaptcha \
-        fof/oauth \
-        acpl/mobile-tab \
-        justoverclock/flarum-ext-welcomebox \
-        ralkage/flarum-ext-profile-messages \
-        ramon/avocado \
-        ramon/colored \
-        ekumanov/flarum-ext-post-search \
-        ekumanov/flarum-ext-forum-widgets \
-        ekumanov/flarum-ext-markdown-tables \
-        ekumanov/flarum-ext-inline-audio \
-        tryhackx/flarum-topic-rating \
-        fof/rich-text \
-        huseyinfiliz/modern-footer \
-        huseyinfiliz/stickiest \
-        huseyinfiliz/flarum-diff \
-        linkrobins/auto-verify \
-        linkrobins/font-sizer \
-    "; \
-    for ext in $EXTENSIONS; do \
-        echo "==> Installing $ext ..."; \
-        composer require "$ext" --no-interaction --prefer-dist --update-no-dev 2>&1 \
-            && echo "    ✓ $ext installed" \
-            || echo "    ✗ $ext skipped (not compatible)"; \
-    done
-
-# Clean up Composer cache in builder
-RUN rm -rf /root/.composer/cache
+        --no-dev \
+        --no-install
+COPY src/box/composer.json.TEMPLATE composer.json
+RUN composer install --prefer-dist --no-dev --optimize-autoloader \
+    && composer clear-cache
 
 # ═══════════════════════════════════════════════════════════════════════
 # Stage 2: Runtime — minimal image with only what's needed to run

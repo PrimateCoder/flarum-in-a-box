@@ -2,6 +2,22 @@
 
 All notable changes to Flarum-In-A-Box are documented here.
 
+## 0.2.9 — 2026-05-07
+
+### Added
+- 7 new extensions enabled by default:
+  - [**Menu Control**](https://packagist.org/packages/resofire/menu-control) (`resofire/menu-control`)
+  - [**Mobile Search**](https://packagist.org/packages/resofire/mobile-search) (`resofire/mobile-search`)
+  - [**External Links in New Tab**](https://packagist.org/packages/walsgit/external-links-in-new-tab) (`walsgit/external-links-in-new-tab`)
+  - [**Recycle Bin**](https://packagist.org/packages/walsgit/recycle-bin) (`walsgit/recycle-bin`)
+  - [**Last Post Avatar**](https://packagist.org/packages/rob006/flarum-ext-last-post-avatar) (`rob006/flarum-ext-last-post-avatar`)
+  - [**Profile Views**](https://packagist.org/packages/michaelbelgium/flarum-profile-views) (`michaelbelgium/flarum-profile-views`)
+  - [**Log Viewer**](https://packagist.org/packages/ianm/log-viewer) (`ianm/log-viewer`)
+- [**Discussion Cards**](https://packagist.org/packages/walsgit/flarum-discussion-cards) (`walsgit/flarum-discussion-cards`) installed but not enabled
+- Moderator account (`moderator` / `password`) in the Mod group with standard permissions
+- Sample members `user1`–`user5`
+- 🛠️ Moderation Playground seed discussion — a heated debate among `user1`–`user5` so you can practice locking, hiding, suspending, etc. on real-looking content
+
 ## 0.2.8 — 2026-05-04
 
 ### Changed

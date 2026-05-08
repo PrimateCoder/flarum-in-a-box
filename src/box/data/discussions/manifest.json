@@ -38,5 +38,23 @@
         "file": "08-avocado-theme.md",
         "title": "🥑 Try the Avocado Theme!",
         "tag": "showcase"
+    },
+    {
+        "file": "09-moderation-playground.md",
+        "title": "🛠️ Moderation Playground — try the mod tools here",
+        "tag": "off-topic",
+        "replies": [
+            {"author": "user1", "file": "09r1-user1.md"},
+            {"author": "user2", "file": "09r2-user2.md"},
+            {"author": "user1", "file": "09r3-user1.md"},
+            {"author": "user3", "file": "09r4-user3.md"},
+            {"author": "user4", "file": "09r5-user4.md"},
+            {"author": "user3", "file": "09r6-user3.md"},
+            {"author": "user5", "file": "09r7-user5.md"},
+            {"author": "user1", "file": "09r8-user1.md"},
+            {"author": "user2", "file": "09r9-user2.md"},
+            {"author": "user5", "file": "09r10-user5.md"}
+        ]
     }
 ]
+

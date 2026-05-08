@@ -1,6 +1,6 @@
 ## 👋 Welcome to Flarum-In-A-Box!
 
-**Flarum-In-A-Box** is a ready-to-run, all-in-one Docker container from [🎹 Piano | Tell](https://pianotell.com) that gives you a fully working **Flarum 2.x** forum with ~50 extensions pre-installed. No setup, no configuration — just launch and go.
+**Flarum-In-A-Box** is a ready-to-run, all-in-one Docker container from [🎹 Piano | Tell](https://pianotell.com) that gives you a fully working **Flarum 2.x** forum with \~50 extensions pre-installed. No setup, no configuration — just launch and go.
 
 ### What is it good for?
 
@@ -12,10 +12,12 @@
 
 ### Default Accounts
 
-| Account | Username | Password |
-|---------|----------|----------|
-| Admin | `admin` | `password` |
-| User | `user` | `password` |
+| Account | Username | Password | Role |
+|---------|----------|----------|------|
+| Admin | `admin` | `password` | Full Admin Panel access |
+| Moderator | `moderator` | `password` | Moderator group — can lock, hide, suspend, etc. |
+| Member | `user` | `password` | Regular forum member |
+| Members | `user1` … `user5` | `password` | Sample members (used in the Moderation Playground discussion) |
 
 The admin account has full access to the Admin Panel (click your avatar → Administration). New users can sign up without email confirmation.
 

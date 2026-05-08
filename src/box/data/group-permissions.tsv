@@ -7,3 +7,18 @@
 group_id	permission
 2	fof.gamification.viewRankingPage
 2	searchUsers
+
+# Moderator group (4) — standard moderation toolkit.
+4	discussion.delete
+4	discussion.deletePosts
+4	discussion.editPosts
+4	discussion.hide
+4	discussion.hidePosts
+4	discussion.lock
+4	discussion.rename
+4	discussion.sticky
+4	discussion.tag
+4	discussion.viewIpsPosts
+4	user.suspend
+4	viewFlags
+

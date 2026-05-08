@@ -1,56 +1,61 @@
 # Extensions to enable on first boot.
-# One extension ID per line. Lines starting with # and blank lines are ignored.
-# Extension IDs use dashes (e.g. fof-best-answer), NOT slashes — they are what
-# `php flarum extension:enable <id>` expects.
+# One extension ID per line, sorted alphabetically. Lines starting with #
+# and blank lines are ignored. Extension IDs use dashes (e.g.
+# fof-best-answer), NOT slashes — they are what `php flarum extension:enable
+# <id>` expects.
 #
 # To install a new extension:
 #   1. Add the composer package name to src/box/Dockerfile EXTENSIONS list
+#      (also alphabetically sorted)
 #   2. Add the corresponding extension ID here to enable it by default
-#   3. (or omit here to leave it installed-but-disabled)
+#      (or omit here to leave it installed-but-disabled)
 
+acpl-mobile-tab
+antoinefr-bbcode-fa
+ekumanov-forum-widgets
+ekumanov-inline-audio
+ekumanov-markdown-tables
+ekumanov-post-search
 flarum-extension-manager
-pianotell-flamoji
-
-# Friends of Flarum
+fof-bbcode-details
 fof-best-answer
 fof-byobu
+fof-categories
+fof-discussion-views
 fof-drafts
 fof-follow-tags
 fof-formatting
+fof-frontpage
+fof-gamification
+fof-ignore-users
+fof-impersonate
+fof-linguist
+fof-links
+fof-merge-discussions
+fof-moderator-notes
+fof-move-posts
 fof-polls
+fof-reactions
+fof-rich-text
+fof-sitemap
+fof-split
+fof-synopsis
 fof-upload
 fof-user-bio
 fof-user-directory
-fof-ignore-users
-fof-linguist
-fof-categories
-fof-links
-fof-sitemap
-fof-frontpage
-fof-gamification
-fof-moderator-notes
-fof-reactions
-fof-synopsis
-fof-impersonate
-fof-split
-fof-merge-discussions
-fof-bbcode-details
-fof-discussion-views
-fof-move-posts
-fof-rich-text
-
-# Other community
-antoinefr-bbcode-fa
-forumaker-profile-cover
-forumaker-magicslider
 forumaker-magicread
-acpl-mobile-tab
-ralkage-profile-messages
-ekumanov-post-search
-ekumanov-forum-widgets
-ekumanov-markdown-tables
-ekumanov-inline-audio
-tryhackx-topic-rating
-huseyinfiliz-stickiest
+forumaker-magicslider
+forumaker-profile-cover
 huseyinfiliz-diff
+huseyinfiliz-stickiest
+ianm-log-viewer
 linkrobins-auto-verify
+michaelbelgium-profile-views
+pianotell-flamoji
+ralkage-profile-messages
+resofire-menu-control
+resofire-mobile-search
+rob006-last-post-avatar
+tryhackx-topic-rating
+walsgit-external-links-in-new-tab
+walsgit-recycle-bin
