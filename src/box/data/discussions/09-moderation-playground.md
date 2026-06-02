@@ -21,4 +21,25 @@ Log in as **moderator** (password: `password`) and try out:
 
 - The **admin** account has all moderator permissions plus the Admin Panel. Use the **moderator** account to feel what a non-admin mod sees.
 
+### The moderation flow
+
+Here's roughly what happens from a heated post to a resolution (rendered with the bundled [**Mermaid**](https://mermaid.ai/open-source/) extension — write a `mermaid` fenced block in any post to make your own):
+
+```mermaid
+flowchart TD
+    A[User posts something heated] --> B{Anyone flags it?}
+    B -- No --> C[Stays visible]
+    B -- Yes --> D[Mod sees flag indicator]
+    D --> E{What's the right action?}
+    E -->|Borderline| F[✏️ Edit to clean up]
+    E -->|Off-topic / rude| G[🚫 Hide post]
+    E -->|Argument escalating| H[🔒 Lock discussion]
+    E -->|Repeat offender| I[🚷 Suspend user]
+    F --> J[Action logged]
+    G --> J
+    H --> J
+    I --> J
+    J --> K[👁️ Review in Admin → Log Viewer]
+```
+
 Now scroll down — the gloves are off. 👇

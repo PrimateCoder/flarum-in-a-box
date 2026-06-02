@@ -55,6 +55,11 @@
             {"author": "user2", "file": "09r9-user2.md"},
             {"author": "user5", "file": "09r10-user5.md"}
         ]
+    },
+    {
+        "file": "10-photo-gallery.md",
+        "title": "📸 Photo Gallery — powered by PhotoSwipe",
+        "tag": "showcase"
     }
 ]
 

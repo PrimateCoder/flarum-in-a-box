@@ -4,9 +4,12 @@
 
 ## 📦 Flarum-In-A-Box
 
-**One command. \~60 extensions. A fully working Flarum 2.x forum.**
+[![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/PrimateCoder/flarum-in-a-box/blob/main/LICENSE) [![Docker Image Version](https://img.shields.io/docker/v/pianotell/flarum-in-a-box?sort=semver)](https://hub.docker.com/r/pianotell/flarum-in-a-box) [![Docker Pulls](https://img.shields.io/docker/pulls/pianotell/flarum-in-a-box)](https://hub.docker.com/r/pianotell/flarum-in-a-box)
 
-Inspired by the [discussion about demo sites](https://discuss.flarum.org/d/39142-flarum-official-demo-sites-usage-update) + the fact that [PianoTell](https://forum.pianotell.com) itself is [already on Docker](https://forum.pianotell.com/d/785-piano-tell-hosting-updates), I built [**Flarum-In-A-Box**](https://github.com/PrimateCoder/flarum-in-a-box) — an all-in-one Docker container that gives you a complete Flarum 2.x forum with \~60 popular extensions pre-installed. No server setup, no configuration, no database provisioning.
+
+**One command. 80+ extensions. A fully working Flarum 2.x forum.**
+
+Inspired by the [discussion about demo sites](https://discuss.flarum.org/d/39142-flarum-official-demo-sites-usage-update) + the fact that [PianoTell](https://forum.pianotell.com) itself is [already on Docker](https://forum.pianotell.com/d/785-piano-tell-hosting-updates), I built [**Flarum-In-A-Box**](https://hub.docker.com/r/pianotell/flarum-in-a-box) — an all-in-one Docker container that gives you a complete Flarum 2.x forum with 80+ popular extensions pre-installed. No server setup, no configuration, no database provisioning.
 
 Now everyone can have admin access and customize Flarum 2.x at will in the comfort and safety of Flarum-In-A-Box.
 
@@ -53,43 +56,45 @@ This makes it effortless for anyone to:
 
 **PHP 8.5** on Alpine Linux, with **nginx**, **MariaDB**, and **s6-overlay** — all in a single container. Multi-arch (amd64 + arm64), so it runs on Intel PCs, Apple Silicon Macs, and ARM cloud instances.
 
-#### \~60 Extensions Pre-Installed
+#### \~70 Extensions Pre-Installed
 
 **Enabled by default** — [Tags](https://packagist.org/packages/flarum/tags), [Likes](https://packagist.org/packages/flarum/likes), [Mentions](https://packagist.org/packages/flarum/mentions), [Lock](https://packagist.org/packages/flarum/lock), [Sticky](https://packagist.org/packages/flarum/sticky), [Suspend](https://packagist.org/packages/flarum/suspend), [Markdown](https://packagist.org/packages/flarum/markdown), [BBCode](https://packagist.org/packages/flarum/bbcode), [Emoji](https://packagist.org/packages/flarum/emoji), [Flags](https://packagist.org/packages/flarum/flags), [Nicknames](https://packagist.org/packages/flarum/nicknames), [Subscriptions](https://packagist.org/packages/flarum/subscriptions), [Approval](https://packagist.org/packages/flarum/approval), [Statistics](https://packagist.org/packages/flarum/statistics), [Extension Manager](https://packagist.org/packages/flarum/extension-manager), plus:
 
 **Composer & posting**
-- [**Flamoji**](https://discuss.flarum.org/d/39130-new-flamoji-emoji-picker-extension-for-flarum) — Intuitive emoji picker 😉
-- [**Drafts**](https://packagist.org/packages/fof/drafts), [**Formatting**](https://packagist.org/packages/fof/formatting), [**Polls**](https://packagist.org/packages/fof/polls), [**Upload**](https://packagist.org/packages/fof/upload), [**Rich Text**](https://packagist.org/packages/fof/rich-text), [**BBCode Details**](https://packagist.org/packages/fof/bbcode-details)
-- [**BBCode FA**](https://packagist.org/packages/antoinefr/flarum-ext-bbcode-fa), [**Markdown Tables**](https://packagist.org/packages/ekumanov/flarum-ext-markdown-tables), [**Inline Audio**](https://packagist.org/packages/ekumanov/flarum-ext-inline-audio)
+- 📸 [PhotoSwipe](https://discuss.flarum.org/d/39120-friendsofflarum-photoswipe-image-lightbox) — Full-screen tap-to-zoom image lightbox (try the **Photo Gallery** seed discussion)
+- [Flamoji](https://discuss.flarum.org/d/39130-new-flamoji-emoji-picker-extension-for-flarum) — Intuitive emoji picker 😉
+- [Drafts](https://packagist.org/packages/fof/drafts), [Formatting](https://packagist.org/packages/fof/formatting), [Polls](https://packagist.org/packages/fof/polls), [Upload](https://packagist.org/packages/fof/upload), [Rich Text](https://packagist.org/packages/fof/rich-text), [BBCode Details](https://packagist.org/packages/fof/bbcode-details)
+- [BBCode FA](https://packagist.org/packages/antoinefr/flarum-ext-bbcode-fa), [Mermaid](https://packagist.org/packages/datlechin/flarum-mermaid) (diagrams — sample ones sprinkled across the seed discussions), [Markdown Tables](https://packagist.org/packages/ekumanov/flarum-ext-markdown-tables), [Inline Audio](https://packagist.org/packages/ekumanov/flarum-ext-inline-audio)
 
 **Discussions & navigation**
-- [**Best Answer**](https://packagist.org/packages/fof/best-answer), [**Byobu**](https://packagist.org/packages/fof/byobu) (private discussions), [**Categories**](https://packagist.org/packages/fof/categories), [**Follow Tags**](https://packagist.org/packages/fof/follow-tags), [**Frontpage**](https://packagist.org/packages/fof/frontpage), [**Sitemap**](https://packagist.org/packages/fof/sitemap), [**Synopsis**](https://packagist.org/packages/fof/synopsis), [**Discussion Views**](https://packagist.org/packages/fof/discussion-views)
-- [**Stickiest**](https://packagist.org/packages/huseyinfiliz/stickiest), [**Last Post Avatar**](https://packagist.org/packages/rob006/flarum-ext-last-post-avatar), [**External Links in New Tab**](https://packagist.org/packages/walsgit/external-links-in-new-tab)
-- [**Menu Control**](https://packagist.org/packages/resofire/menu-control), [**Mobile Search**](https://packagist.org/packages/resofire/mobile-search), [**Mobile Tab**](https://packagist.org/packages/acpl/mobile-tab)
+- [Best Answer](https://packagist.org/packages/fof/best-answer), [Byobu](https://packagist.org/packages/fof/byobu) (private discussions), [Categories](https://packagist.org/packages/fof/categories), [Follow Tags](https://packagist.org/packages/fof/follow-tags), [Frontpage](https://packagist.org/packages/fof/frontpage), [Sitemap](https://packagist.org/packages/fof/sitemap), [Synopsis](https://packagist.org/packages/fof/synopsis), [Discussion Views](https://packagist.org/packages/fof/discussion-views)
+- [Stickiest](https://packagist.org/packages/huseyinfiliz/stickiest), [Last Post Avatar](https://packagist.org/packages/rob006/flarum-ext-last-post-avatar), [External Links in New Tab](https://packagist.org/packages/walsgit/external-links-in-new-tab)
+- [Menu Control](https://packagist.org/packages/resofire/menu-control), [Mobile Search](https://packagist.org/packages/resofire/mobile-search), [Mobile Tab](https://packagist.org/packages/acpl/mobile-tab)
 
 **User experience**
-- [**Reactions**](https://packagist.org/packages/fof/reactions), [**Gamification**](https://packagist.org/packages/fof/gamification) (voting + rankings), [**User Bio**](https://packagist.org/packages/fof/user-bio), [**User Directory**](https://packagist.org/packages/fof/user-directory), [**Ignore Users**](https://packagist.org/packages/fof/ignore-users)
-- [**Profile Cover**](https://packagist.org/packages/forumaker/profile-cover) (GIF/WebP), [**MagicSlider**](https://packagist.org/packages/forumaker/magicslider), [**MagicRead**](https://packagist.org/packages/forumaker/magicread)
-- [**Profile Messages**](https://packagist.org/packages/ralkage/flarum-ext-profile-messages) (XenForo-style), [**Profile Views**](https://packagist.org/packages/michaelbelgium/flarum-profile-views) (view counts), [**Topic Rating**](https://packagist.org/packages/tryhackx/flarum-topic-rating), [**Forum Widgets**](https://packagist.org/packages/ekumanov/flarum-ext-forum-widgets)
+- [Reactions](https://packagist.org/packages/fof/reactions), [Gamification](https://packagist.org/packages/fof/gamification) (voting + rankings), [User Bio](https://packagist.org/packages/fof/user-bio), [User Directory](https://packagist.org/packages/fof/user-directory), [Ignore Users](https://packagist.org/packages/fof/ignore-users)
+- [Profile Cover](https://packagist.org/packages/forumaker/profile-cover) (GIF/WebP), [MagicSlider](https://packagist.org/packages/forumaker/magicslider), [MagicRead](https://packagist.org/packages/forumaker/magicread)
+- [Profile Messages](https://packagist.org/packages/ralkage/flarum-ext-profile-messages) (XenForo-style), [Profile Views](https://packagist.org/packages/michaelbelgium/flarum-profile-views) (view counts), [Passkey](https://packagist.org/packages/datlechin/flarum-passkey) (passwordless sign-in), [Topic Rating](https://packagist.org/packages/tryhackx/flarum-topic-rating), [Forum Widgets](https://packagist.org/packages/ekumanov/flarum-ext-forum-widgets)
 
 **Moderation & admin**
-- [**Moderator Notes**](https://packagist.org/packages/fof/moderator-notes), [**Impersonate**](https://packagist.org/packages/fof/impersonate) (log in as any user), [**Split**](https://packagist.org/packages/fof/split), [**Merge Discussions**](https://packagist.org/packages/fof/merge-discussions), [**Move Posts**](https://discuss.flarum.org/d/38941-friendsofflarum-move-posts)
-- [**Diff**](https://packagist.org/packages/huseyinfiliz/flarum-diff) (post edit history), [**Recycle Bin**](https://packagist.org/packages/walsgit/recycle-bin), [**Log Viewer**](https://packagist.org/packages/ianm/log-viewer) (browse Flarum logs from the admin panel)
+- [Moderator Notes](https://packagist.org/packages/fof/moderator-notes), [Impersonate](https://packagist.org/packages/fof/impersonate) (log in as any user), [Split](https://packagist.org/packages/fof/split), [Merge Discussions](https://packagist.org/packages/fof/merge-discussions), [Move Posts](https://discuss.flarum.org/d/38941-friendsofflarum-move-posts)
+- [Diff](https://packagist.org/packages/huseyinfiliz/flarum-diff) (post edit history), [Recycle Bin](https://packagist.org/packages/walsgit/recycle-bin), [Backup](https://packagist.org/packages/ramon/backup) (on-demand DB + storage backups), [Log Viewer](https://packagist.org/packages/ianm/log-viewer) (browse Flarum logs from the admin panel)
 
 **Other**
-- [**Linguist**](https://packagist.org/packages/fof/linguist), [**Links**](https://packagist.org/packages/fof/links), [**Post Search**](https://packagist.org/packages/ekumanov/flarum-ext-post-search), [**AutoVerify**](https://packagist.org/packages/linkrobins/auto-verify) (skip email verification on signup)
+- [Linguist](https://packagist.org/packages/fof/linguist), [Links](https://packagist.org/packages/fof/links), [Post Search](https://packagist.org/packages/ekumanov/flarum-ext-post-search), [AutoVerify](https://packagist.org/packages/linkrobins/auto-verify) (skip email verification on signup)
 
 **Installed but not enabled** (try them from Admin Panel → Extensions):
 
 - 🥑 [**Avocado**](https://discuss.flarum.org/d/38940-avocado-theme) — Modern, polished theme with hero banner and rich customization
-- 🎨 [**Colored**](https://packagist.org/packages/ramon/colored) — Colorful usernames by group
-- 🦶 [**Modern Footer**](https://packagist.org/packages/huseyinfiliz/modern-footer) — Responsive footer
-- 🔤 [**Font Sizer**](https://packagist.org/packages/linkrobins/font-sizer) — Adjustable font sizes
-- 🧰 [**MagicBB**](https://packagist.org/packages/forumaker/magicbb) — Extended BBCode toolkit (extra composer icons)
-- 👋 [**WelcomeBox**](https://packagist.org/packages/justoverclock/flarum-ext-welcomebox) — Customizable welcome banner
-- 🃏 [**Discussion Cards**](https://packagist.org/packages/walsgit/flarum-discussion-cards) — Card-style discussion list
-- 🔐 [**OAuth**](https://packagist.org/packages/fof/oauth) — Social login framework (Google, Discord, GitHub, etc.)
-- 🟡 [**Yandex OAuth**](https://packagist.org/packages/forumaker/yandex-oauth) / [**SmartCaptcha**](https://packagist.org/packages/forumaker/yandex-smartcaptcha)
+- 🎨 [Colored](https://packagist.org/packages/ramon/colored) — Colorful usernames by group
+- 🦶 [Modern Footer](https://packagist.org/packages/huseyinfiliz/modern-footer) — Responsive footer
+- 🔤 [Font Sizer](https://packagist.org/packages/linkrobins/font-sizer) — Adjustable font sizes
+- 🧰 [MagicBB](https://packagist.org/packages/forumaker/magicbb) — Extended BBCode toolkit (extra composer icons)
+- 👋 [WelcomeBox](https://packagist.org/packages/justoverclock/flarum-ext-welcomebox) — Customizable welcome banner
+- 🃏 [Discussion Cards](https://packagist.org/packages/walsgit/flarum-discussion-cards) — Card-style discussion list
+- 💬 [Shoutbox](https://packagist.org/packages/linkrobins/shoutbox) — Lightweight realtime chat box
+- 🔐 [OAuth](https://packagist.org/packages/fof/oauth) — Social login framework (Google, Discord, GitHub, etc.)
+- 🟡 [Yandex OAuth](https://packagist.org/packages/forumaker/yandex-oauth) / [SmartCaptcha](https://packagist.org/packages/forumaker/yandex-smartcaptcha)
 - And several utilities ([Terms](https://packagist.org/packages/fof/terms), [Pages](https://packagist.org/packages/fof/pages), [Share Social](https://packagist.org/packages/fof/share-social), [Discussion Thumbnail](https://packagist.org/packages/fof/discussion-thumbnail), [Anti Spam](https://packagist.org/packages/fof/anti-spam))
 
 ### Ready Out of the Box
@@ -136,9 +141,9 @@ docker cp flarum-in-a-box:/var/www/html/config.php ./config.php
 
 ### Links
 
+- [Docker Hub](https://hub.docker.com/r/pianotell/flarum-in-a-box)
 - [Changelog](https://github.com/PrimateCoder/flarum-in-a-box/blob/main/CHANGELOG.md)
 - [Source code on GitHub](https://github.com/PrimateCoder/flarum-in-a-box)
-- [Docker Hub](https://hub.docker.com/r/pianotell/flarum-in-a-box)
 - [Report an issue](https://github.com/PrimateCoder/flarum-in-a-box/issues)
 
 ### Feedback Welcome!

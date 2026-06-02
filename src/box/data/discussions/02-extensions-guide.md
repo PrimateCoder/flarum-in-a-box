@@ -1,6 +1,35 @@
 ## Extensions Guide
 
-This instance comes with **\~60 extensions** installed. Visit **Admin Panel → Extensions** to see and configure them all.
+This instance comes with **80+ extensions** installed. Visit **Admin Panel → Extensions** to see and configure them all.
+
+Here's how they're organized (rendered with the bundled [**Mermaid**](https://mermaid.ai/open-source/) extension):
+
+```mermaid
+mindmap
+  root((80+ extensions))
+    Composer & posting
+      Flamoji (emoji)
+      Rich Text editor
+      Polls, Drafts, Upload
+      Mermaid (you're seeing it!)
+      PhotoSwipe (image lightbox)
+    Discussions & nav
+      Tags, Categories, Frontpage
+      Stickiest, Best Answer
+      Mobile Tab, Mobile Search
+    User experience
+      Gamification & rankings
+      Profile Cover, Bio, Messages
+      Passkey (passwordless)
+      Reactions, Topic Rating
+    Moderation & admin
+      Hide, Lock, Suspend
+      Recycle Bin, Diff
+      Backup, Log Viewer
+    Themes & looks
+      Avocado (try it!)
+      Colored, Modern Footer
+```
 
 ### Enabled by Default
 

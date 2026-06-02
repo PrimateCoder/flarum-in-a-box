@@ -12,6 +12,8 @@
 
 acpl-mobile-tab
 antoinefr-bbcode-fa
+datlechin-mermaid
+datlechin-passkey
 ekumanov-forum-widgets
 ekumanov-inline-audio
 ekumanov-markdown-tables
@@ -34,6 +36,7 @@ fof-links
 fof-merge-discussions
 fof-moderator-notes
 fof-move-posts
+fof-photoswipe
 fof-polls
 fof-reactions
 fof-rich-text
@@ -53,6 +56,7 @@ linkrobins-auto-verify
 michaelbelgium-profile-views
 pianotell-flamoji
 ralkage-profile-messages
+ramon-backup
 resofire-menu-control
 resofire-mobile-search
 rob006-last-post-avatar

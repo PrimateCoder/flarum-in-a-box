@@ -1,6 +1,8 @@
 # 📦 Flarum-In-A-Box
 
-All-in-one Docker container with **Flarum 2.x**, ~60 extensions, MariaDB, and nginx.
+[![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/PrimateCoder/flarum-in-a-box/blob/main/LICENSE) [![Docker Image Version](https://img.shields.io/docker/v/pianotell/flarum-in-a-box?sort=semver)](https://hub.docker.com/r/pianotell/flarum-in-a-box) [![Docker Pulls](https://img.shields.io/docker/pulls/pianotell/flarum-in-a-box)](https://hub.docker.com/r/pianotell/flarum-in-a-box)
+
+All-in-one Docker container with **Flarum 2.x**, 80+ extensions, PHP 8.5, MariaDB, and nginx.
 One command to launch a fully working forum — from [🎹 Piano | Tell](https://pianotell.com).
 
 > ⚠️ **Demo/playground image** — fantastic for testing and development, but not for production. Data is ephemeral for the lifetime of the container.
@@ -100,6 +102,7 @@ The image is pre-seeded so the forum looks lived-in from the first second:
 ### Additional Extensions — Enabled by Default
 
 **Composer & posting**
+- [**PhotoSwipe**](https://discuss.flarum.org/d/39120-friendsofflarum-photoswipe-image-lightbox) — 📸 Full-screen tap-to-zoom image lightbox (try the **Photo Gallery** seed discussion)
 - [**Flamoji**](https://discuss.flarum.org/d/39130-new-flamoji-emoji-picker-extension-for-flarum) — Visual emoji picker
 - [**Drafts**](https://packagist.org/packages/fof/drafts) — Save post drafts
 - [**Formatting**](https://packagist.org/packages/fof/formatting) — Autoimage, Autovideo, MediaEmbed
@@ -108,6 +111,7 @@ The image is pre-seeded so the forum looks lived-in from the first second:
 - [**Rich Text**](https://packagist.org/packages/fof/rich-text) — WYSIWYG-style editor
 - [**BBCode Details**](https://packagist.org/packages/fof/bbcode-details) — Expandable sections in posts
 - [**BBCode FA**](https://packagist.org/packages/antoinefr/flarum-ext-bbcode-fa) — Font Awesome icons in posts
+- [**Mermaid**](https://packagist.org/packages/datlechin/flarum-mermaid) — Render `mermaid` fenced blocks as flowcharts/sequence diagrams (sample diagrams sprinkled throughout the seed discussions)
 - [**Markdown Tables**](https://packagist.org/packages/ekumanov/flarum-ext-markdown-tables) — Tables in posts
 - [**Inline Audio**](https://packagist.org/packages/ekumanov/flarum-ext-inline-audio) — Audio player in posts
 
@@ -138,6 +142,7 @@ The image is pre-seeded so the forum looks lived-in from the first second:
 - [**MagicRead**](https://packagist.org/packages/forumaker/magicread) — Reading progress / scroll tracking
 - [**Profile Messages**](https://packagist.org/packages/ralkage/flarum-ext-profile-messages) — Public profile messages (XenForo-style)
 - [**Profile Views**](https://packagist.org/packages/michaelbelgium/flarum-profile-views) — Track and display profile view counts
+- [**Passkey**](https://packagist.org/packages/datlechin/flarum-passkey) — WebAuthn passwordless sign-in
 - [**Topic Rating**](https://packagist.org/packages/tryhackx/flarum-topic-rating) — Rate discussions
 - [**Forum Widgets**](https://packagist.org/packages/ekumanov/flarum-ext-forum-widgets) — Customizable widgets
 
@@ -149,6 +154,7 @@ The image is pre-seeded so the forum looks lived-in from the first second:
 - [**Move Posts**](https://discuss.flarum.org/d/38941-friendsofflarum-move-posts) — Move posts between discussions
 - [**Diff**](https://packagist.org/packages/huseyinfiliz/flarum-diff) — Post edit history
 - [**Recycle Bin**](https://packagist.org/packages/walsgit/recycle-bin) — Restore deleted discussions/posts
+- [**Backup**](https://packagist.org/packages/ramon/backup) — On-demand database + storage backups from the admin panel
 - [**Log Viewer**](https://packagist.org/packages/ianm/log-viewer) — View Flarum log files in the admin panel
 
 **Other**
@@ -166,6 +172,7 @@ The image is pre-seeded so the forum looks lived-in from the first second:
 - 🧰 [**MagicBB**](https://packagist.org/packages/forumaker/magicbb) — Extended BBCode toolkit
 - 👋 [**WelcomeBox**](https://packagist.org/packages/justoverclock/flarum-ext-welcomebox) — Customizable welcome banner
 - 🃏 [**Discussion Cards**](https://packagist.org/packages/walsgit/flarum-discussion-cards) — Card-style discussion list
+- 💬 [**Shoutbox**](https://packagist.org/packages/linkrobins/shoutbox) — Lightweight realtime chat box
 - 🔐 [**OAuth**](https://packagist.org/packages/fof/oauth) — Social login framework (Google, Discord, GitHub, etc.)
 - 🟡 [**Yandex OAuth**](https://packagist.org/packages/forumaker/yandex-oauth) — Yandex ID login (requires OAuth + setup)
 - 🛡️ [**Yandex SmartCaptcha**](https://packagist.org/packages/forumaker/yandex-smartcaptcha) — Yandex CAPTCHA for signup

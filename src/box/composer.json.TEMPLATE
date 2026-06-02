@@ -1,6 +1,6 @@
 {
     "name": "pianotell/flarum-in-a-box",
-    "description": "All-in-one Flarum 2.x demo container with ~50 extensions, MariaDB, and nginx",
+    "description": "All-in-one Flarum 2.x demo container with 80+ extensions, MariaDB, and nginx",
     "type": "project",
     "keywords": [
         "forum",
@@ -17,6 +17,8 @@
     "require": {
         "acpl/mobile-tab": "*",
         "antoinefr/flarum-ext-bbcode-fa": "*",
+        "datlechin/flarum-mermaid": "*",
+        "datlechin/flarum-passkey": "*",
         "ekumanov/flarum-ext-forum-widgets": "*",
         "ekumanov/flarum-ext-inline-audio": "*",
         "ekumanov/flarum-ext-markdown-tables": "*",
@@ -59,6 +61,7 @@
         "fof/move-posts": "*",
         "fof/oauth": "*",
         "fof/pages": "*",
+        "fof/photoswipe": "*",
         "fof/polls": "*",
         "fof/reactions": "*",
         "fof/rich-text": "*",
@@ -83,10 +86,12 @@
         "justoverclock/flarum-ext-welcomebox": "*",
         "linkrobins/auto-verify": "*",
         "linkrobins/font-sizer": "*",
+        "linkrobins/shoutbox": "*",
         "michaelbelgium/flarum-profile-views": "*",
         "pianotell/flarum-ext-flamoji": "*",
         "ralkage/flarum-ext-profile-messages": "*",
         "ramon/avocado": "*",
+        "ramon/backup": "*",
         "ramon/colored": "*",
         "resofire/menu-control": "*",
         "resofire/mobile-search": "*",

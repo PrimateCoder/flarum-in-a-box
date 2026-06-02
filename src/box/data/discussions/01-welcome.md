@@ -1,6 +1,6 @@
 ## 👋 Welcome to Flarum-In-A-Box!
 
-**Flarum-In-A-Box** is a ready-to-run, all-in-one Docker container from [🎹 Piano | Tell](https://pianotell.com) that gives you a fully working **Flarum 2.x** forum with \~50 extensions pre-installed. No setup, no configuration — just launch and go.
+**Flarum-In-A-Box** is a ready-to-run, all-in-one Docker container from [🎹 Piano | Tell](https://pianotell.com) that gives you a fully working **Flarum 2.x** forum with 80+ extensions pre-installed. No setup, no configuration — just launch and go.
 
 ### What is it good for?
 

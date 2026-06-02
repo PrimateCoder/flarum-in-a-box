@@ -2,18 +2,32 @@
 
 All notable changes to Flarum-In-A-Box are documented here.
 
+## 0.2.10 — 2026-06-01
+
+### Changed
+- **Flarum upgraded to 2.0.0-rc.2** (was 2.0.0-rc.1)
+
+### Added
+- 📸 **[PhotoSwipe](https://discuss.flarum.org/d/39120-friendsofflarum-photoswipe-image-lightbox)** image lightbox (`fof/photoswipe`) — click any post image to open a full-screen, swipeable, pinch-zoomable gallery
+- New seed discussion "📸 Photo Gallery — powered by PhotoSwipe" with sample images to try the lightbox immediately
+- 4 more extensions enabled by default:
+  - [Mermaid Diagrams](https://packagist.org/packages/datlechin/flarum-mermaid) (`datlechin/flarum-mermaid`) — sample diagrams sprinkled across the seed discussions (extensions guide, customization tips, moderation playground)
+  - [Passkey Authentication](https://packagist.org/packages/datlechin/flarum-passkey) (`datlechin/flarum-passkey`) **so cool!**
+  - [Backup](https://packagist.org/packages/ramon/backup) (`ramon/backup`)
+- [Shoutbox](https://packagist.org/packages/linkrobins/shoutbox) (`linkrobins/shoutbox`) installed but not enabled
+
 ## 0.2.9 — 2026-05-07
 
 ### Added
 - 7 new extensions enabled by default:
-  - [**Menu Control**](https://packagist.org/packages/resofire/menu-control) (`resofire/menu-control`)
-  - [**Mobile Search**](https://packagist.org/packages/resofire/mobile-search) (`resofire/mobile-search`)
-  - [**External Links in New Tab**](https://packagist.org/packages/walsgit/external-links-in-new-tab) (`walsgit/external-links-in-new-tab`)
-  - [**Recycle Bin**](https://packagist.org/packages/walsgit/recycle-bin) (`walsgit/recycle-bin`)
-  - [**Last Post Avatar**](https://packagist.org/packages/rob006/flarum-ext-last-post-avatar) (`rob006/flarum-ext-last-post-avatar`)
-  - [**Profile Views**](https://packagist.org/packages/michaelbelgium/flarum-profile-views) (`michaelbelgium/flarum-profile-views`)
-  - [**Log Viewer**](https://packagist.org/packages/ianm/log-viewer) (`ianm/log-viewer`)
-- [**Discussion Cards**](https://packagist.org/packages/walsgit/flarum-discussion-cards) (`walsgit/flarum-discussion-cards`) installed but not enabled
+  - [Menu Control](https://packagist.org/packages/resofire/menu-control) (`resofire/menu-control`)
+  - [Mobile Search](https://packagist.org/packages/resofire/mobile-search) (`resofire/mobile-search`)
+  - [External Links in New Tab](https://packagist.org/packages/walsgit/external-links-in-new-tab) (`walsgit/external-links-in-new-tab`)
+  - [Recycle Bin](https://packagist.org/packages/walsgit/recycle-bin) (`walsgit/recycle-bin`)
+  - [Last Post Avatar](https://packagist.org/packages/rob006/flarum-ext-last-post-avatar) (`rob006/flarum-ext-last-post-avatar`)
+  - [Profile Views](https://packagist.org/packages/michaelbelgium/flarum-profile-views) (`michaelbelgium/flarum-profile-views`)
+  - [Log Viewer](https://packagist.org/packages/ianm/log-viewer) (`ianm/log-viewer`)
+- [Discussion Cards](https://packagist.org/packages/walsgit/flarum-discussion-cards) (`walsgit/flarum-discussion-cards`) installed but not enabled
 - Moderator account (`moderator` / `password`) in the Mod group with standard permissions
 - Sample members `user1`–`user5`
 - 🛠️ Moderation Playground seed discussion — a heated debate among `user1`–`user5` so you can practice locking, hiding, suspending, etc. on real-looking content

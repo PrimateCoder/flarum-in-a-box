@@ -73,7 +73,7 @@ RUN composer install --prefer-dist --no-dev --optimize-autoloader \
 FROM php:8.5-fpm-alpine
 
 LABEL org.opencontainers.image.title="Flarum-in-a-Box"
-LABEL org.opencontainers.image.description="All-in-one Flarum 2.x demo container with ~50 extensions"
+LABEL org.opencontainers.image.description="All-in-one Flarum 2.x demo container with 80+ extensions"
 LABEL org.opencontainers.image.source="https://github.com/PrimateCoder/flarum-in-a-box"
 
 # Install PHP extensions using pre-built binaries (auto-cleans build deps)
