@@ -36,6 +36,7 @@ mindmap
 **Flarum core bundle:** [Tags](https://packagist.org/packages/flarum/tags), [Likes](https://packagist.org/packages/flarum/likes), [Mentions](https://packagist.org/packages/flarum/mentions), [Subscriptions](https://packagist.org/packages/flarum/subscriptions), [Lock](https://packagist.org/packages/flarum/lock), [Sticky](https://packagist.org/packages/flarum/sticky), [Suspend](https://packagist.org/packages/flarum/suspend), [Markdown](https://packagist.org/packages/flarum/markdown), [BBCode](https://packagist.org/packages/flarum/bbcode), [Emoji](https://packagist.org/packages/flarum/emoji), [Flags](https://packagist.org/packages/flarum/flags), [Nicknames](https://packagist.org/packages/flarum/nicknames), [Approval](https://packagist.org/packages/flarum/approval), [Statistics](https://packagist.org/packages/flarum/statistics), [Extension Manager](https://packagist.org/packages/flarum/extension-manager).
 
 **Composer & posting:**
+- [**PhotoSwipe**](https://discuss.flarum.org/d/39120-friendsofflarum-photoswipe-image-lightbox) — 📸 Full-screen tap-to-zoom image lightbox (try the **Photo Gallery** seed discussion)
 - [**Flamoji**](https://discuss.flarum.org/d/39130-new-flamoji-emoji-picker-extension-for-flarum) — Visual emoji picker
 - [**Drafts**](https://packagist.org/packages/fof/drafts) — Save post drafts
 - [**Formatting**](https://packagist.org/packages/fof/formatting) — Autoimage, Autovideo, MediaEmbed
@@ -44,6 +45,7 @@ mindmap
 - [**Rich Text**](https://packagist.org/packages/fof/rich-text) — WYSIWYG-style editor
 - [**BBCode Details**](https://packagist.org/packages/fof/bbcode-details) — Expandable sections
 - [**BBCode FA**](https://packagist.org/packages/antoinefr/flarum-ext-bbcode-fa) — Font Awesome icons in posts
+- [**Mermaid**](https://mermaid.ai/open-source/) — Render `mermaid` fenced blocks as flowcharts/sequence diagrams (sample diagrams sprinkled throughout the seed discussions)
 - [**Markdown Tables**](https://packagist.org/packages/ekumanov/flarum-ext-markdown-tables) — Tables in posts
 - [**Inline Audio**](https://packagist.org/packages/ekumanov/flarum-ext-inline-audio) — Audio player in posts
 
@@ -74,6 +76,7 @@ mindmap
 - [**MagicRead**](https://packagist.org/packages/forumaker/magicread) — Reading progress / scroll tracking
 - [**Profile Messages**](https://packagist.org/packages/ralkage/flarum-ext-profile-messages) — Public profile messages (XenForo-style)
 - [**Profile Views**](https://packagist.org/packages/michaelbelgium/flarum-profile-views) — Track and display profile view counts
+- [**Passkey**](https://packagist.org/packages/datlechin/flarum-passkey) — WebAuthn passwordless sign-in
 - [**Topic Rating**](https://packagist.org/packages/tryhackx/flarum-topic-rating) — Rate discussions
 - [**Forum Widgets**](https://packagist.org/packages/ekumanov/flarum-ext-forum-widgets) — Customizable widgets
 
@@ -85,6 +88,7 @@ mindmap
 - [**Move Posts**](https://discuss.flarum.org/d/38941-friendsofflarum-move-posts) — Move posts between discussions
 - [**Diff**](https://packagist.org/packages/huseyinfiliz/flarum-diff) — Post edit history
 - [**Recycle Bin**](https://packagist.org/packages/walsgit/recycle-bin) — Restore deleted discussions/posts
+- [**Backup**](https://packagist.org/packages/ramon/backup) — On-demand database + storage backups from the admin panel
 - [**Log Viewer**](https://packagist.org/packages/ianm/log-viewer) — View Flarum log files in the admin panel
 
 **Other:**
@@ -104,6 +108,7 @@ Some extensions are installed but disabled by default — try them out!
 - 🧰 [**MagicBB**](https://packagist.org/packages/forumaker/magicbb) — Extended BBCode toolkit (extra composer icons)
 - 👋 [**WelcomeBox**](https://packagist.org/packages/justoverclock/flarum-ext-welcomebox) — Customizable welcome banner
 - 🃏 [**Discussion Cards**](https://packagist.org/packages/walsgit/flarum-discussion-cards) — Card-style discussion list
+- 💬 [**Shoutbox**](https://packagist.org/packages/linkrobins/shoutbox) — Lightweight realtime chat box
 - 🔐 [**OAuth**](https://packagist.org/packages/fof/oauth) — Social login framework (Google, Discord, GitHub, etc.)
 - 🟡 [**Yandex OAuth**](https://packagist.org/packages/forumaker/yandex-oauth) — Yandex ID login (requires OAuth + setup)
 - 🛡️ [**Yandex SmartCaptcha**](https://packagist.org/packages/forumaker/yandex-smartcaptcha) — Yandex CAPTCHA for signup

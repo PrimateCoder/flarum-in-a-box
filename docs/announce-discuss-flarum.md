@@ -56,7 +56,7 @@ This makes it effortless for anyone to:
 
 **PHP 8.5** on Alpine Linux, with **nginx**, **MariaDB**, and **s6-overlay** — all in a single container. Multi-arch (amd64 + arm64), so it runs on Intel PCs, Apple Silicon Macs, and ARM cloud instances.
 
-#### \~70 Extensions Pre-Installed
+#### 80+ Extensions Pre-Installed
 
 **Enabled by default** — [Tags](https://packagist.org/packages/flarum/tags), [Likes](https://packagist.org/packages/flarum/likes), [Mentions](https://packagist.org/packages/flarum/mentions), [Lock](https://packagist.org/packages/flarum/lock), [Sticky](https://packagist.org/packages/flarum/sticky), [Suspend](https://packagist.org/packages/flarum/suspend), [Markdown](https://packagist.org/packages/flarum/markdown), [BBCode](https://packagist.org/packages/flarum/bbcode), [Emoji](https://packagist.org/packages/flarum/emoji), [Flags](https://packagist.org/packages/flarum/flags), [Nicknames](https://packagist.org/packages/flarum/nicknames), [Subscriptions](https://packagist.org/packages/flarum/subscriptions), [Approval](https://packagist.org/packages/flarum/approval), [Statistics](https://packagist.org/packages/flarum/statistics), [Extension Manager](https://packagist.org/packages/flarum/extension-manager), plus:
 
