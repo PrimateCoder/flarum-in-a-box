@@ -20,11 +20,10 @@ mindmap
     User experience
       Gamification & rankings
       Profile Cover, Bio, Messages
-      Passkey (passwordless)
       Reactions, Topic Rating
     Moderation & admin
       Hide, Lock, Suspend
-      Recycle Bin, Diff
+      Audit log, Recycle Bin, Diff
       Backup, Log Viewer
     Themes & looks
       Avocado (try it!)
@@ -76,11 +75,11 @@ mindmap
 - [**MagicRead**](https://packagist.org/packages/forumaker/magicread) — Reading progress / scroll tracking
 - [**Profile Messages**](https://packagist.org/packages/ralkage/flarum-ext-profile-messages) — Public profile messages (XenForo-style)
 - [**Profile Views**](https://packagist.org/packages/michaelbelgium/flarum-profile-views) — Track and display profile view counts
-- [**Passkey**](https://packagist.org/packages/datlechin/flarum-passkey) — WebAuthn passwordless sign-in
 - [**Topic Rating**](https://packagist.org/packages/tryhackx/flarum-topic-rating) — Rate discussions
 - [**Forum Widgets**](https://packagist.org/packages/ekumanov/flarum-ext-forum-widgets) — Customizable widgets
 
 **Moderation & admin:**
+- [**Audit**](https://docs.flarum.org/2.x/extensions/audit) — Audit log of admin and moderation actions
 - [**Moderator Notes**](https://packagist.org/packages/fof/moderator-notes) — Per-user mod notes
 - [**Impersonate**](https://packagist.org/packages/fof/impersonate) — Admin can log in as any user
 - [**Split**](https://packagist.org/packages/fof/split) — Split discussions
@@ -109,6 +108,7 @@ Some extensions are installed but disabled by default — try them out!
 - 👋 [**WelcomeBox**](https://packagist.org/packages/justoverclock/flarum-ext-welcomebox) — Customizable welcome banner
 - 🃏 [**Discussion Cards**](https://packagist.org/packages/walsgit/flarum-discussion-cards) — Card-style discussion list
 - 💬 [**Shoutbox**](https://packagist.org/packages/linkrobins/shoutbox) — Lightweight realtime chat box
+- 🔑 [**Passkey**](https://packagist.org/packages/datlechin/flarum-passkey) — WebAuthn passwordless sign-in
 - 🔐 [**OAuth**](https://packagist.org/packages/fof/oauth) — Social login framework (Google, Discord, GitHub, etc.)
 - 🟡 [**Yandex OAuth**](https://packagist.org/packages/forumaker/yandex-oauth) — Yandex ID login (requires OAuth + setup)
 - 🛡️ [**Yandex SmartCaptcha**](https://packagist.org/packages/forumaker/yandex-smartcaptcha) — Yandex CAPTCHA for signup

@@ -24,6 +24,7 @@
         "ekumanov/flarum-ext-markdown-tables": "*",
         "ekumanov/flarum-ext-post-search": "*",
         "flarum/approval": "*",
+        "flarum/audit": "*",
         "flarum/bbcode": "*",
         "flarum/core": "^2.0",
         "flarum/emoji": "*",

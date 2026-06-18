@@ -13,11 +13,11 @@
 acpl-mobile-tab
 antoinefr-bbcode-fa
 datlechin-mermaid
-datlechin-passkey
 ekumanov-forum-widgets
 ekumanov-inline-audio
 ekumanov-markdown-tables
 ekumanov-post-search
+flarum-audit
 flarum-extension-manager
 fof-bbcode-details
 fof-best-answer

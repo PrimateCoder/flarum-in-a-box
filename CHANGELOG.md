@@ -2,6 +2,14 @@
 
 All notable changes to Flarum-In-A-Box are documented here.
 
+## 0.2.12 — 2026-06-18
+
+### Added
+- [Audit](https://docs.flarum.org/2.x/extensions/audit) (`flarum/audit`) — audit log of admin and moderation actions, enabled by default
+
+### Changed
+- Passkey now installed but disabled by default (enable from Admin Panel → Extensions)
+
 ## 0.2.10 & 0.2.11 — 2026-06-01
 
 ### Changed

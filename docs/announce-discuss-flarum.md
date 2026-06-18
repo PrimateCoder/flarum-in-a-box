@@ -74,10 +74,10 @@ This makes it effortless for anyone to:
 **User experience**
 - [Reactions](https://packagist.org/packages/fof/reactions), [Gamification](https://packagist.org/packages/fof/gamification) (voting + rankings), [User Bio](https://packagist.org/packages/fof/user-bio), [User Directory](https://packagist.org/packages/fof/user-directory), [Ignore Users](https://packagist.org/packages/fof/ignore-users)
 - [Profile Cover](https://packagist.org/packages/forumaker/profile-cover) (GIF/WebP), [MagicSlider](https://packagist.org/packages/forumaker/magicslider), [MagicRead](https://packagist.org/packages/forumaker/magicread)
-- [Profile Messages](https://packagist.org/packages/ralkage/flarum-ext-profile-messages) (XenForo-style), [Profile Views](https://packagist.org/packages/michaelbelgium/flarum-profile-views) (view counts), [Passkey](https://packagist.org/packages/datlechin/flarum-passkey) (passwordless sign-in), [Topic Rating](https://packagist.org/packages/tryhackx/flarum-topic-rating), [Forum Widgets](https://packagist.org/packages/ekumanov/flarum-ext-forum-widgets)
+- [Profile Messages](https://packagist.org/packages/ralkage/flarum-ext-profile-messages) (XenForo-style), [Profile Views](https://packagist.org/packages/michaelbelgium/flarum-profile-views) (view counts), [Topic Rating](https://packagist.org/packages/tryhackx/flarum-topic-rating), [Forum Widgets](https://packagist.org/packages/ekumanov/flarum-ext-forum-widgets)
 
 **Moderation & admin**
-- [Moderator Notes](https://packagist.org/packages/fof/moderator-notes), [Impersonate](https://packagist.org/packages/fof/impersonate) (log in as any user), [Split](https://packagist.org/packages/fof/split), [Merge Discussions](https://packagist.org/packages/fof/merge-discussions), [Move Posts](https://discuss.flarum.org/d/38941-friendsofflarum-move-posts)
+- [Audit](https://docs.flarum.org/2.x/extensions/audit) (admin/mod action log), [Moderator Notes](https://packagist.org/packages/fof/moderator-notes), [Impersonate](https://packagist.org/packages/fof/impersonate) (log in as any user), [Split](https://packagist.org/packages/fof/split), [Merge Discussions](https://packagist.org/packages/fof/merge-discussions), [Move Posts](https://discuss.flarum.org/d/38941-friendsofflarum-move-posts)
 - [Diff](https://packagist.org/packages/huseyinfiliz/flarum-diff) (post edit history), [Recycle Bin](https://packagist.org/packages/walsgit/recycle-bin), [Backup](https://packagist.org/packages/ramon/backup) (on-demand DB + storage backups), [Log Viewer](https://packagist.org/packages/ianm/log-viewer) (browse Flarum logs from the admin panel)
 
 **Other**
@@ -93,6 +93,7 @@ This makes it effortless for anyone to:
 - 👋 [WelcomeBox](https://packagist.org/packages/justoverclock/flarum-ext-welcomebox) — Customizable welcome banner
 - 🃏 [Discussion Cards](https://packagist.org/packages/walsgit/flarum-discussion-cards) — Card-style discussion list
 - 💬 [Shoutbox](https://packagist.org/packages/linkrobins/shoutbox) — Lightweight realtime chat box
+- 🔑 [Passkey](https://packagist.org/packages/datlechin/flarum-passkey) — WebAuthn passwordless sign-in
 - 🔐 [OAuth](https://packagist.org/packages/fof/oauth) — Social login framework (Google, Discord, GitHub, etc.)
 - 🟡 [Yandex OAuth](https://packagist.org/packages/forumaker/yandex-oauth) / [SmartCaptcha](https://packagist.org/packages/forumaker/yandex-smartcaptcha)
 - And several utilities ([Terms](https://packagist.org/packages/fof/terms), [Pages](https://packagist.org/packages/fof/pages), [Share Social](https://packagist.org/packages/fof/share-social), [Discussion Thumbnail](https://packagist.org/packages/fof/discussion-thumbnail), [Anti Spam](https://packagist.org/packages/fof/anti-spam))
