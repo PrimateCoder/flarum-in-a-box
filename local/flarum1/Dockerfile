@@ -39,6 +39,7 @@ RUN composer create-project flarum/flarum:^1.8 . \
         --prefer-dist \
         --no-interaction \
         --no-dev \
+    && composer require flarum/extension-manager:"*" --no-interaction \
     && composer clear-cache
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -60,6 +61,9 @@ RUN apk add --no-cache \
         s6-overlay
 
 COPY --from=builder /var/www/html /var/www/html
+
+# Composer (needed for the Extension Manager at runtime)
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 RUN mkdir -p /run/nginx
 COPY src/box/nginx.conf /etc/nginx/http.d/default.conf
@@ -88,6 +92,7 @@ RUN set -e \
     && mariadb -u root -e "GRANT ALL ON flarum.* TO 'flarum'@'localhost' IDENTIFIED BY 'flarum'; FLUSH PRIVILEGES;" \
     && cd /var/www/html \
     && php flarum install --file=/tmp/install.yaml \
+    && php flarum extension:enable flarum-extension-manager \
     && mkdir -p storage/.composer public/assets \
     && chown -R www-data:www-data /var/www/html \
     && chmod -R 775 storage public/assets \
