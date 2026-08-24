@@ -203,22 +203,6 @@ docker run -d -p 9090:80 -e FLARUM_FORUM_URL=http://localhost:9090 \
 - [Discuss on Flarum Community](https://discuss.flarum.org/d/39191-flarum-in-a-box-try-flarum-2x-in-one-command-with-docker)
 - [Report an issue](https://github.com/PrimateCoder/flarum-in-a-box/issues)
 
-## Releasing
-
-Use `scripts/release.sh` from a clean `main` checkout to open `CHANGELOG.md`
-for manual editing, run repository checks, commit, and create the matching
-`v*` tag. Without `--version`, it increments the latest release's minor
-version (for example, `v0.2.13` becomes `v0.3.0`). Add `--push` and `--watch`
-to publish and wait for the multi-architecture Docker Hub build:
-
-```bash
-scripts/release.sh --local-smoke-test --expect-flarum 2.0.0-rc.5 --push --watch
-```
-
-Save the changelog with an `## VERSION — YYYY-MM-DD` heading before closing the
-editor. Set `VISUAL`, `EDITOR`, or pass `--editor 'code --wait'` to choose the
-editor. Run `scripts/release.sh --help` for all options.
-
 ## License
 
 MIT

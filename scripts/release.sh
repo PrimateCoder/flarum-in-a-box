@@ -4,6 +4,17 @@ set -euo pipefail
 
 usage() {
     cat <<'EOF'
+Creates a versioned Flarum-in-a-Box release from a clean main checkout.
+It opens CHANGELOG.md for manual editing, runs repository checks, commits,
+and creates the matching v* tag. Save the changelog with a
+"## VERSION — YYYY-MM-DD" heading before closing the editor.
+
+Without --version, the latest release's minor version is incremented
+(for example, v0.2.13 becomes v0.3.0). Add --push and --watch to publish
+to origin and wait for the multi-architecture Docker Hub build.
+
+Set VISUAL or EDITOR, or pass --editor, to choose the changelog editor.
+
 Usage:
   scripts/release.sh [options]
 
