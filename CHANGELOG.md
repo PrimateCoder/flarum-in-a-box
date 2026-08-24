@@ -2,6 +2,12 @@
 
 All notable changes to Flarum-In-A-Box are documented here.
 
+## 0.2.14 — 2026-08-23
+
+### Changed
+- **Flarum upgraded to 2.0.0-rc.6**
+- Base image moved to Alpine 3.24 — PHP 8.5.9, MariaDB 11.8.8
+
 ## 0.2.13 — 2026-07-11
 
 ### Changed

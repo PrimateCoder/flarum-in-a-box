@@ -15,7 +15,7 @@
 # ═══════════════════════════════════════════════════════════════════════
 # Stage 1: Builder — compile PHP extensions, install Flarum + extensions
 # ═══════════════════════════════════════════════════════════════════════
-FROM php:8.5-fpm-alpine AS builder
+FROM php:8.5-fpm-alpine3.24 AS builder
 
 # Build dependencies (only in builder stage, discarded in final image)
 RUN apk add --no-cache \
@@ -70,7 +70,7 @@ RUN composer install --prefer-dist --no-dev --optimize-autoloader \
 # ═══════════════════════════════════════════════════════════════════════
 # Stage 2: Runtime — minimal image with only what's needed to run
 # ═══════════════════════════════════════════════════════════════════════
-FROM php:8.5-fpm-alpine
+FROM php:8.5-fpm-alpine3.24
 
 LABEL org.opencontainers.image.title="Flarum-in-a-Box"
 LABEL org.opencontainers.image.description="All-in-one Flarum 2.x demo container with 80+ extensions"
