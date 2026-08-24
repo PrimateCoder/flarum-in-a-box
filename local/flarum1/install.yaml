@@ -1,0 +1,17 @@
+baseUrl: "http://localhost:8080"
+databaseConfiguration:
+  driver: mysql
+  host: "localhost"
+  port: 3306
+  database: "flarum"
+  username: "flarum"
+  password: "flarum"
+  prefix: "flarum_"
+adminUser:
+  username: "admin"
+  password: "password"
+  email: "admin@example.com"
+settings:
+  forum_title: "📦 Flarum-In-A-Box (1.x)"
+  welcome_title: "👋 Welcome to Flarum-In-A-Box!"
+  welcome_message: "A basic Flarum 1.8 installation in a single container. Log in as admin/password to get started!"
