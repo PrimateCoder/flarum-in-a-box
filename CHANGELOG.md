@@ -2,6 +2,11 @@
 
 All notable changes to Flarum-In-A-Box are documented here.
 
+## 0.2.16 — 2026-08-27
+
+### Changed
+- **Flarum upgraded to 2.0.0-rc.8**
+
 ## 0.2.15 — 2026-08-24
 
 ### Changed
