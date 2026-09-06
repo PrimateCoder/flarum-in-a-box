@@ -27,10 +27,23 @@
 ## Architecture
 
 - All-in-one container: PHP 8.5-FPM + nginx + MariaDB + s6-overlay on Alpine
+- **This is the Flarum 2.x edition branch** — see "Branches & Editions" below
 - **Setup runs at build time** via `src/box/setup.sh` — installs Flarum, enables extensions, seeds tags + demo posts, all baked into the image layer
 - Runtime entrypoint (`src/box/entrypoint.sh`) is minimal: only sed-replaces the forum URL in `config.php` if `FLARUM_FORUM_URL` env var is set, then exec's `/init` (s6-overlay's PID 1)
 - Image: `pianotell/flarum-in-a-box` on Docker Hub
 - Multi-arch build (amd64 + arm64) via GitHub Actions, native runner per arch (no QEMU)
+
+### Branches & Editions
+
+- `main` = **Flarum 2.x edition** (this branch) — PHP 8.5, `mariadb` driver key, 80+ extensions → git tags `v0.x.y` → Docker `latest`, `0.x`
+- `1.x` = **Flarum 1.x edition** — PHP 8.3, `mysql` driver key, 40+ curated extensions → git tags `v0.1.y` → Docker `0.1.y`, `0.1`, `flarum1`. **Never publishes `latest`** — this branch always owns `latest`.
+- Shared bugfixes (s6-rc services, nginx conf, `setup.sh` plumbing, entrypoint) are cherry-picked between branches. Data files (`tags.tsv`, extensions, seeds) and docs intentionally diverge.
+- Flarum 1.x branch quirks (matters when cherry-picking into it):
+  - Its DB `driver` is `mysql` in both `install.yaml` and `config.php` — the `mariadb` driver key doesn't exist until Flarum 2.x
+  - Its tags table has **no `is_primary` column** — primary vs secondary is modeled by the `parent_id` hierarchy, so `tags.tsv` + `import-tabular.php` diverge from this branch
+  - PHP base is `php:8.3-fpm-alpine` — Flarum 1.x supports PHP up to 8.3
+  - No Docker Hub documentation sync on the 1.x branch (`dockerhub-description.yml` removed there) — the Hub description is owned by `main` only
+  - Docs (README, announce post, seed extension guide) are 2.x-only on `main`; the 1.x branch maintains its own lean README and pruned seeds
 
 ### Process supervisor
 
@@ -42,9 +55,9 @@
 
 ## Workflow / Releases
 
-- **CI builds only on tag push** (`v*`) and manual dispatch — pushes to `main` no longer trigger builds. To release: `git tag v0.x.y && git push --tags`
+- **CI builds only on tag push** (`v*`) and manual dispatch — pushes to `main` no longer trigger builds. To release: `git tag v0.x.y && git push --tags` (the `1.x` branch releases via `v0.1.y` tags with its own `build.yml`)
 - The CI workflow uses native amd64 (`ubuntu-latest`) and native arm64 (`ubuntu-24.04-arm`) runners in parallel; no QEMU emulation. Total build time is ~5–8 minutes. Force-pushing a tag cancels in-flight builds (concurrency group `build-${{ github.ref }}`).
-- Tags published to Docker Hub: `0.x.y`, `0.x`, `latest`, `sha-...`
+- Tags published to Docker Hub: `0.x.y`, `0.x`, `latest`, `sha-...` (the `1.x` branch publishes `0.1.y`, `0.1`, `flarum1` — never `latest`)
 - The Docker Hub long description is auto-synced from `README.md` by `.github/workflows/dockerhub-description.yml` on every push to `main` that touches the README.
 
 ---
