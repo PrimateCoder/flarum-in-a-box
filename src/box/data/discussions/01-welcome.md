@@ -24,7 +24,7 @@ The admin account has full access to the Admin Panel (click your avatar → Admi
 
 - ⚠️ **Demo/playground image** — fantastic for testing and development, but not for production. Data is ephemeral for the lifetime of the container.
 - 🔑 Change the default passwords if exposing this beyond localhost.
-- 📦 Want Flarum 2.x instead? This is the Flarum 1.x edition (the `0.1` image tag) — the Flarum 2.x edition is the `latest` tag of the same repository.
+- 📦 Want Flarum 2.x instead? This is the Flarum 1.x edition (the `flarum1` image tag) — the Flarum 2.x edition is the `latest` tag of the same repository.
 
 ### Join the Conversation 💬
 

@@ -5,7 +5,7 @@
 All-in-one Docker container with **Flarum 1.8**, 40+ extensions, PHP 8.3, MariaDB, and nginx.
 One command to launch a fully working forum — from [🎹 Piano | Tell](https://pianotell.com).
 
-> ℹ️ **Two editions, one repository.** This is the **Flarum 1.x edition** — published as image tag `0.1` (and `flarum1`). The **Flarum 2.x edition** is the `latest` tag of the same image, built from the `main` branch. Pick whichever Flarum generation you need — or run both side by side (see below).
+> ℹ️ **Two editions, one repository.** This is the **Flarum 1.x edition** — published as image tag `flarum1` (rolling; each release is also pinned as `0.1.y`). The **Flarum 2.x edition** is the `latest` tag of the same image, built from the `main` branch. Pick whichever Flarum generation you need — or run both side by side (see below).
 
 > ⚠️ **Demo/playground image** — fantastic for testing and development, but not for production. Data is ephemeral for the lifetime of the container.
 >
@@ -21,13 +21,13 @@ One command to launch a fully working forum — from [🎹 Piano | Tell](https:/
 
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 2. Search for `pianotell/flarum-in-a-box`
-3. In the image's **Tags** tab pick `0.1`, then click **Run** — in Optional Settings be sure to set the host port to `8081`
+3. In the image's **Tags** tab pick `flarum1`, then click **Run** — in Optional Settings be sure to set the host port to `8081`
 4. Open [http://localhost:8081](http://localhost:8081)
 
 ### Option B: Command Line (one command)
 
 ```bash
-docker run -d -p 8081:80 --name flarum-1x pianotell/flarum-in-a-box:0.1
+docker run -d -p 8081:80 --name flarum1-in-a-box pianotell/flarum-in-a-box:flarum1
 ```
 
 Then open [http://localhost:8081](http://localhost:8081).
@@ -41,7 +41,7 @@ The Flarum 1.x edition defaults to port `8081` so it coexists cleanly with the F
 docker run -d -p 8080:80 --name flarum-in-a-box pianotell/flarum-in-a-box
 
 # Flarum 1.x (this edition)
-docker run -d -p 8081:80 --name flarum-1x pianotell/flarum-in-a-box:0.1
+docker run -d -p 8081:80 --name flarum1-in-a-box pianotell/flarum-in-a-box:flarum1
 ```
 
 Each container is fully self-contained (own database, own seeded data) — no conflicts.
@@ -52,9 +52,9 @@ Docker caches images locally, so to get the latest release you need
 to explicitly pull, remove the old container, and start a fresh one:
 
 ```bash
-docker pull pianotell/flarum-in-a-box:0.1
-docker rm -f flarum-1x
-docker run -d -p 8081:80 --name flarum-1x pianotell/flarum-in-a-box:0.1
+docker pull pianotell/flarum-in-a-box:flarum1
+docker rm -f flarum1-in-a-box
+docker run -d -p 8081:80 --name flarum1-in-a-box pianotell/flarum-in-a-box:flarum1
 ```
 
 ## Default Accounts
@@ -71,36 +71,36 @@ docker run -d -p 8081:80 --name flarum-1x pianotell/flarum-in-a-box:0.1
 Run Flarum CLI commands directly from the host:
 
 ```bash
-docker exec flarum-1x php flarum info
+docker exec flarum1-in-a-box php flarum info
 ```
 
 Get a shell inside the container (to run Composer, edit files, etc.):
 
 ```bash
-docker exec -it flarum-1x /bin/sh
+docker exec -it flarum1-in-a-box /bin/sh
 ```
 
 Copy files to and from the container:
 
 ```bash
 # Host → container
-docker cp my-logo.png flarum-1x:/var/www/html/public/assets/
+docker cp my-logo.png flarum1-in-a-box:/var/www/html/public/assets/
 
 # Container → host
-docker cp flarum-1x:/var/www/html/config.php ./config.php
+docker cp flarum1-in-a-box:/var/www/html/config.php ./config.php
 ```
 
 View container logs (nginx, PHP-FPM, MariaDB, s6-overlay):
 
 ```bash
 # All logs
-docker logs flarum-1x
+docker logs flarum1-in-a-box
 
 # Follow live
-docker logs -f flarum-1x
+docker logs -f flarum1-in-a-box
 
 # Last 100 lines
-docker logs --tail 100 flarum-1x
+docker logs --tail 100 flarum1-in-a-box
 ```
 
 ## What's Included
@@ -174,7 +174,7 @@ If you map to a non-default port, set `FLARUM_FORUM_URL` to match:
 
 ```bash
 docker run -d -p 9090:80 -e FLARUM_FORUM_URL=http://localhost:9090 \
-    --name flarum-1x pianotell/flarum-in-a-box:0.1
+    --name flarum1-in-a-box pianotell/flarum-in-a-box:flarum1
 ```
 
 ## Links
