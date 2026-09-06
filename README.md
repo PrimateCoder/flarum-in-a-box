@@ -5,6 +5,8 @@
 All-in-one Docker container with **Flarum 2.x**, 80+ extensions, PHP 8.5, MariaDB, and nginx.
 One command to launch a fully working forum — from [🎹 Piano | Tell](https://pianotell.com).
 
+Want Flarum 1.x instead? [See here](https://github.com/PrimateCoder/flarum-in-a-box/blob/1.x/README.md).
+
 > ⚠️ **Demo/playground image** — fantastic for testing and development, but not for production. Data is ephemeral for the lifetime of the container.
 
 ![Flarum-In-A-Box Homepage](https://raw.githubusercontent.com/PrimateCoder/flarum-in-a-box/main/docs/images/homepage.png)
