@@ -1,11 +1,15 @@
-# 📦 Flarum-In-A-Box
+# 📦 Flarum-In-A-Box (Flarum 1.x Edition)
 
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/PrimateCoder/flarum-in-a-box/blob/main/LICENSE) [![Docker Image Version](https://img.shields.io/docker/v/pianotell/flarum-in-a-box?sort=semver)](https://hub.docker.com/r/pianotell/flarum-in-a-box) [![Docker Pulls](https://img.shields.io/docker/pulls/pianotell/flarum-in-a-box)](https://hub.docker.com/r/pianotell/flarum-in-a-box)
 
-All-in-one Docker container with **Flarum 2.x**, 80+ extensions, PHP 8.5, MariaDB, and nginx.
+All-in-one Docker container with **Flarum 1.8**, 40+ extensions, PHP 8.3, MariaDB, and nginx.
 One command to launch a fully working forum — from [🎹 Piano | Tell](https://pianotell.com).
 
+> ℹ️ **Two editions, one repository.** This is the **Flarum 1.x edition** — published as image tag `0.1` (and `flarum1`). The **Flarum 2.x edition** is the `latest` tag of the same image, built from the `main` branch. Pick whichever Flarum generation you need — or run both side by side (see below).
+
 > ⚠️ **Demo/playground image** — fantastic for testing and development, but not for production. Data is ephemeral for the lifetime of the container.
+>
+> Also note: Flarum 1.8 is in maintenance mode upstream — it receives critical and security fixes only, winding down toward end of life around the end of 2026. For anything beyond a demo or a legacy extension compatibility check, prefer the Flarum 2.x edition.
 
 ![Flarum-In-A-Box Homepage](https://raw.githubusercontent.com/PrimateCoder/flarum-in-a-box/main/docs/images/homepage.png)
 
@@ -17,16 +21,30 @@ One command to launch a fully working forum — from [🎹 Piano | Tell](https:/
 
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 2. Search for `pianotell/flarum-in-a-box`
-3. Click **Run** — in Optional Settings be sure to set the host port to `8080`
-4. Open [http://localhost:8080](http://localhost:8080)
+3. In the image's **Tags** tab pick `0.1`, then click **Run** — in Optional Settings be sure to set the host port to `8081`
+4. Open [http://localhost:8081](http://localhost:8081)
 
 ### Option B: Command Line (one command)
 
 ```bash
-docker run -d -p 8080:80 --name flarum-in-a-box pianotell/flarum-in-a-box
+docker run -d -p 8081:80 --name flarum-1x pianotell/flarum-in-a-box:0.1
 ```
 
-Then open [http://localhost:8080](http://localhost:8080).
+Then open [http://localhost:8081](http://localhost:8081).
+
+### Running Both Editions Side by Side
+
+The Flarum 1.x edition defaults to port `8081` so it coexists cleanly with the Flarum 2.x edition on `8080`:
+
+```bash
+# Flarum 2.x (latest)
+docker run -d -p 8080:80 --name flarum-in-a-box pianotell/flarum-in-a-box
+
+# Flarum 1.x (this edition)
+docker run -d -p 8081:80 --name flarum-1x pianotell/flarum-in-a-box:0.1
+```
+
+Each container is fully self-contained (own database, own seeded data) — no conflicts.
 
 ### Updating to the Latest Version
 
@@ -34,9 +52,9 @@ Docker caches images locally, so to get the latest release you need
 to explicitly pull, remove the old container, and start a fresh one:
 
 ```bash
-docker pull pianotell/flarum-in-a-box
-docker rm -f flarum-in-a-box
-docker run -d -p 8080:80 --name flarum-in-a-box pianotell/flarum-in-a-box
+docker pull pianotell/flarum-in-a-box:0.1
+docker rm -f flarum-1x
+docker run -d -p 8081:80 --name flarum-1x pianotell/flarum-in-a-box:0.1
 ```
 
 ## Default Accounts
@@ -53,36 +71,36 @@ docker run -d -p 8080:80 --name flarum-in-a-box pianotell/flarum-in-a-box
 Run Flarum CLI commands directly from the host:
 
 ```bash
-docker exec flarum-in-a-box php flarum info
+docker exec flarum-1x php flarum info
 ```
 
 Get a shell inside the container (to run Composer, edit files, etc.):
 
 ```bash
-docker exec -it flarum-in-a-box /bin/sh
+docker exec -it flarum-1x /bin/sh
 ```
 
 Copy files to and from the container:
 
 ```bash
 # Host → container
-docker cp my-logo.png flarum-in-a-box:/var/www/html/public/assets/
+docker cp my-logo.png flarum-1x:/var/www/html/public/assets/
 
 # Container → host
-docker cp flarum-in-a-box:/var/www/html/config.php ./config.php
+docker cp flarum-1x:/var/www/html/config.php ./config.php
 ```
 
 View container logs (nginx, PHP-FPM, MariaDB, s6-overlay):
 
 ```bash
 # All logs
-docker logs flarum-in-a-box
+docker logs flarum-1x
 
 # Follow live
-docker logs -f flarum-in-a-box
+docker logs -f flarum-1x
 
 # Last 100 lines
-docker logs --tail 100 flarum-in-a-box
+docker logs --tail 100 flarum-1x
 ```
 
 ## What's Included
@@ -96,40 +114,27 @@ docker logs --tail 100 flarum-in-a-box
 The image is pre-seeded so the forum looks lived-in from the first second:
 
 - **8 sample tags** (Announcements, Support, Feedback, Showcase, Off-Topic, Guides, Bugs, plus the bundled General)
-- **9 seed discussions** including a **🛠️ Moderation Playground** — a deliberately-heated thread where `user1`–`user5` argue about moderation policy so you can practice mod actions on real-looking content
+- **7 seed discussions** including a **🛠️ Moderation Playground** — a deliberately-heated thread where `user1`–`user5` argue about moderation policy so you can practice mod actions on real-looking content
 - **Default accounts**: `admin` (Admin), `moderator` (Mod group), `user`, `user1`–`user5` — all with password `password`
 
 ### Additional Extensions — Enabled by Default
 
 **Composer & posting**
 - [**PhotoSwipe**](https://discuss.flarum.org/d/39120-friendsofflarum-photoswipe-image-lightbox) — 📸 Full-screen tap-to-zoom image lightbox (try the **Photo Gallery** seed discussion)
-- [**Flamoji**](https://discuss.flarum.org/d/39130-new-flamoji-emoji-picker-extension-for-flarum) — Visual emoji picker
+- [**Flamoji**](https://discuss.flarum.org/d/39130-new-flamoji-emoji-picker-extension-for-flarum) — Visual emoji picker (try the **Emoji Picker** seed discussion)
 - [**Drafts**](https://packagist.org/packages/fof/drafts) — Save post drafts
 - [**Formatting**](https://packagist.org/packages/fof/formatting) — Autoimage, Autovideo, MediaEmbed
-- [**Polls**](https://packagist.org/packages/fof/polls) — Polls in discussions
+- [**Polls**](https://packagist.org/packages/fof/polls) — Polls in discussions (try the **How to Create a Poll** seed discussion)
 - [**Upload**](https://packagist.org/packages/fof/upload) — File and image attachments
-- [**Rich Text**](https://packagist.org/packages/fof/rich-text) — WYSIWYG-style editor
-- [**BBCode Details**](https://packagist.org/packages/fof/bbcode-details) — Expandable sections in posts
 - [**BBCode FA**](https://packagist.org/packages/antoinefr/flarum-ext-bbcode-fa) — Font Awesome icons in posts
-- [**Mermaid**](https://packagist.org/packages/datlechin/flarum-mermaid) — Render `mermaid` fenced blocks as flowcharts/sequence diagrams (sample diagrams sprinkled throughout the seed discussions)
-- [**Markdown Tables**](https://packagist.org/packages/ekumanov/flarum-ext-markdown-tables) — Tables in posts
-- [**Inline Audio**](https://packagist.org/packages/ekumanov/flarum-ext-inline-audio) — Audio player in posts
 
 **Discussions & navigation**
 - [**Best Answer**](https://packagist.org/packages/fof/best-answer) — Q&A-style best answers
 - [**Byobu**](https://packagist.org/packages/fof/byobu) — Private discussions
-- [**Categories**](https://packagist.org/packages/fof/categories) — Category-based navigation
-- [**Follow Tags**](https://packagist.org/packages/fof/follow-tags) — Per-tag subscriptions
-- [**Frontpage**](https://packagist.org/packages/fof/frontpage) — Pin a discussion as the homepage
-- [**Sitemap**](https://packagist.org/packages/fof/sitemap) — XML sitemap for SEO
-- [**Synopsis**](https://packagist.org/packages/fof/synopsis) — Discussion excerpts in the list
 - [**Discussion Views**](https://packagist.org/packages/fof/discussion-views) — View counters
-- [**Stickiest**](https://packagist.org/packages/huseyinfiliz/stickiest) — Three-tier sticky system
-- [**External Links in New Tab**](https://packagist.org/packages/walsgit/external-links-in-new-tab) — Outbound links open in a new tab
+- [**Follow Tags**](https://packagist.org/packages/fof/follow-tags) — Per-tag subscriptions
 - [**Last Post Avatar**](https://packagist.org/packages/rob006/flarum-ext-last-post-avatar) — Show the last poster's avatar in the discussion list
-- [**Menu Control**](https://packagist.org/packages/resofire/menu-control) — Customize the navigation menu
-- [**Mobile Search**](https://packagist.org/packages/resofire/mobile-search) — Better mobile search experience
-- [**Mobile Tab**](https://packagist.org/packages/acpl/mobile-tab) — Bottom navigation on mobile
+- [**Sitemap**](https://packagist.org/packages/fof/sitemap) — XML sitemap for SEO
 
 **User experience**
 - [**Reactions**](https://packagist.org/packages/fof/reactions) — Post reactions beyond likes
@@ -137,53 +142,30 @@ The image is pre-seeded so the forum looks lived-in from the first second:
 - [**User Bio**](https://packagist.org/packages/fof/user-bio) — Profile bio field
 - [**User Directory**](https://packagist.org/packages/fof/user-directory) — Browsable user list
 - [**Ignore Users**](https://packagist.org/packages/fof/ignore-users) — Ignore other users
-- [**Profile Cover**](https://packagist.org/packages/forumaker/profile-cover) — Cover images on profiles (with GIF/WebP support)
-- [**MagicSlider**](https://packagist.org/packages/forumaker/magicslider) — Image slider in posts
-- [**MagicRead**](https://packagist.org/packages/forumaker/magicread) — Reading progress / scroll tracking
-- [**Profile Messages**](https://packagist.org/packages/ralkage/flarum-ext-profile-messages) — Public profile messages (XenForo-style)
 - [**Profile Views**](https://packagist.org/packages/michaelbelgium/flarum-profile-views) — Track and display profile view counts
-- [**Topic Rating**](https://packagist.org/packages/tryhackx/flarum-topic-rating) — Rate discussions
-- [**Forum Widgets**](https://packagist.org/packages/ekumanov/flarum-ext-forum-widgets) — Customizable widgets
 
 **Moderation & admin**
-- [**Audit**](https://docs.flarum.org/2.x/extensions/audit) — Audit log of admin and moderation actions
 - [**Moderator Notes**](https://packagist.org/packages/fof/moderator-notes) — Per-user mod notes
 - [**Impersonate**](https://packagist.org/packages/fof/impersonate) — Admin can log in as any user
 - [**Split**](https://packagist.org/packages/fof/split) — Split discussions
 - [**Merge Discussions**](https://packagist.org/packages/fof/merge-discussions) — Merge discussions
 - [**Move Posts**](https://discuss.flarum.org/d/38941-friendsofflarum-move-posts) — Move posts between discussions
-- [**Diff**](https://packagist.org/packages/huseyinfiliz/flarum-diff) — Post edit history
-- [**Recycle Bin**](https://packagist.org/packages/walsgit/recycle-bin) — Restore deleted discussions/posts
-- [**Backup**](https://packagist.org/packages/ramon/backup) — On-demand database + storage backups from the admin panel
 - [**Log Viewer**](https://packagist.org/packages/ianm/log-viewer) — View Flarum log files in the admin panel
 
 **Other**
-- [**Linguist**](https://packagist.org/packages/fof/linguist) — Customize translations
 - [**Links**](https://packagist.org/packages/fof/links) — Custom navigation links
-- [**Post Search**](https://packagist.org/packages/ekumanov/flarum-ext-post-search) — Search within posts
-- [**AutoVerify**](https://packagist.org/packages/linkrobins/auto-verify) — Auto-confirms email on signup (no mail server needed)
+- [**Demo Auto-Confirm**](https://github.com/PrimateCoder/flarum-in-a-box/blob/1.x/src/box/extensions/demo-auto-confirm/extend.php) — Bundled demo helper that auto-confirms new signups so the forum works without a mail server (the 1.x stand-in for AutoVerify, which is 2.x-only)
 
 ### Installed but Not Enabled
 
-- 🥑 [**Avocado**](https://discuss.flarum.org/d/38940-avocado-theme) — Modern, polished theme with hero banner, tag styling, and rich customization (try it!)
-- 🎨 [**Colored**](https://packagist.org/packages/ramon/colored) — Colored usernames by group
-- 🦶 [**Modern Footer**](https://packagist.org/packages/huseyinfiliz/modern-footer) — Responsive forum footer
-- 🔤 [**Font Sizer**](https://packagist.org/packages/linkrobins/font-sizer) — Adjustable font sizes
-- 🧰 [**MagicBB**](https://packagist.org/packages/forumaker/magicbb) — Extended BBCode toolkit
-- 👋 [**WelcomeBox**](https://packagist.org/packages/justoverclock/flarum-ext-welcomebox) — Customizable welcome banner
-- 🃏 [**Discussion Cards**](https://packagist.org/packages/walsgit/flarum-discussion-cards) — Card-style discussion list
-- 💬 [**Shoutbox**](https://packagist.org/packages/linkrobins/shoutbox) — Lightweight realtime chat box
-- 🔑 [**Passkey**](https://packagist.org/packages/datlechin/flarum-passkey) — WebAuthn passwordless sign-in
 - 🔐 [**OAuth**](https://packagist.org/packages/fof/oauth) — Social login framework (Google, Discord, GitHub, etc.)
-- 🟡 [**Yandex OAuth**](https://packagist.org/packages/forumaker/yandex-oauth) — Yandex ID login (requires OAuth + setup)
-- 🛡️ [**Yandex SmartCaptcha**](https://packagist.org/packages/forumaker/yandex-smartcaptcha) — Yandex CAPTCHA for signup
-- 📄 [**Pages**](https://packagist.org/packages/fof/pages) — Custom static pages
-- 🖼️ [**Discussion Thumbnail**](https://packagist.org/packages/fof/discussion-thumbnail) — Thumbnails on discussion list
-- 🤝 [**Terms**](https://packagist.org/packages/fof/terms) — Terms of service acceptance
-- 📣 [**Share Social**](https://packagist.org/packages/fof/share-social) — Social media sharing
 - 🛡️ [**Anti Spam**](https://packagist.org/packages/fof/anti-spam) — Spam prevention
+- 👋 [**WelcomeBox**](https://packagist.org/packages/justoverclock/flarum-ext-welcomebox) — Customizable welcome banner (enable 🧩 **Forum Widgets** first — it's the widget framework WelcomeBox requires)
+- 📄 [**Pages**](https://packagist.org/packages/fof/pages) — Custom static pages
+- 📣 [**Share Social**](https://packagist.org/packages/fof/share-social) — Social media sharing
+- 🤝 [**Terms**](https://packagist.org/packages/fof/terms) — Terms of service acceptance
 
-Enable any of these from the Admin Panel → Extensions.
+Enable any of these from the Admin Panel → Extensions. The default-enabled set here mirrors the Flarum 2.x edition on `main`; the 2.x edition additionally ships the full 80+ catalog.
 
 ## Customization
 
@@ -192,7 +174,7 @@ If you map to a non-default port, set `FLARUM_FORUM_URL` to match:
 
 ```bash
 docker run -d -p 9090:80 -e FLARUM_FORUM_URL=http://localhost:9090 \
-    --name flarum-in-a-box pianotell/flarum-in-a-box
+    --name flarum-1x pianotell/flarum-in-a-box:0.1
 ```
 
 ## Links

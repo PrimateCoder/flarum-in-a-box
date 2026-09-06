@@ -6,8 +6,12 @@
 # please view the LICENSE file that was distributed
 # with this source code.
 
-# Flarum-in-a-Box: All-in-one Docker container
-# Bundles Flarum 2.x + MariaDB + nginx + PHP-FPM in a minimal Alpine image.
+# Flarum-in-a-Box: All-in-one Docker container (Flarum 1.x edition)
+# Bundles Flarum 1.8 + MariaDB + nginx + PHP-FPM in a minimal Alpine image.
+#
+# This is the Flarum 1.x line (branch `1.x`, image tags `0.1`/`flarum1`).
+# Flarum 1.x supports PHP up to 8.3, hence the PHP 8.3 base (the Flarum
+# 2.x line on `main` uses PHP 8.5).
 #
 # Multi-stage build: builder stage compiles PHP extensions and installs
 # Flarum + extensions via Composer; final stage has only runtime deps.
@@ -15,7 +19,7 @@
 # ═══════════════════════════════════════════════════════════════════════
 # Stage 1: Builder — compile PHP extensions, install Flarum + extensions
 # ═══════════════════════════════════════════════════════════════════════
-FROM php:8.5-fpm-alpine3.24 AS builder
+FROM php:8.3-fpm-alpine3.24 AS builder
 
 # Build dependencies (only in builder stage, discarded in final image)
 RUN apk add --no-cache \
@@ -57,23 +61,27 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # loop that skipped failures). When that happens, move the offender into
 # the composer.json.TEMPLATE "_disabled-require" parking lot and rebuild.
 WORKDIR /var/www/html
-RUN composer create-project flarum/flarum:^2.0 . \
+RUN composer create-project flarum/flarum:^1.8 . \
         --stability=beta \
         --prefer-dist \
         --no-interaction \
         --no-dev \
         --no-install
 COPY src/box/composer.json.TEMPLATE composer.json
+# Local demo-helper extensions (path repositories — see composer.json.TEMPLATE).
+# Kept in the image (not just vendor/) so the Extension Manager's composer
+# update runs can still resolve the path repo at runtime.
+COPY src/box/extensions/ local-extensions/
 RUN composer install --prefer-dist --no-dev --optimize-autoloader \
     && composer clear-cache
 
 # ═══════════════════════════════════════════════════════════════════════
 # Stage 2: Runtime — minimal image with only what's needed to run
 # ═══════════════════════════════════════════════════════════════════════
-FROM php:8.5-fpm-alpine3.24
+FROM php:8.3-fpm-alpine3.24
 
-LABEL org.opencontainers.image.title="Flarum-in-a-Box"
-LABEL org.opencontainers.image.description="All-in-one Flarum 2.x demo container with 80+ extensions"
+LABEL org.opencontainers.image.title="Flarum-in-a-Box (Flarum 1.x)"
+LABEL org.opencontainers.image.description="All-in-one Flarum 1.8 demo container with 40+ extensions"
 LABEL org.opencontainers.image.source="https://github.com/PrimateCoder/flarum-in-a-box"
 
 # Install PHP extensions using pre-built binaries (auto-cleans build deps)
@@ -105,10 +113,14 @@ COPY src/box/s6-rc.d/ /etc/s6-overlay/s6-rc.d/
 COPY src/box/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# ── MariaDB socket + PHP memory config ────────────────────────────────
+# ── MariaDB socket + PHP memory/error config ──────────────────────────
 RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld \
     && echo "pdo_mysql.default_socket = /run/mysqld/mysqld.sock" > /usr/local/etc/php/conf.d/mariadb-socket.ini \
-    && echo "memory_limit = 512M" > /usr/local/etc/php/conf.d/flarum-memory.ini
+    && echo "memory_limit = 512M" > /usr/local/etc/php/conf.d/flarum-memory.ini \
+    # Never leak PHP output into responses (Flarum 1.x's abandoned
+    # swiftmailer emits deprecation notices under PHP 8.3 that would
+    # otherwise break API responses mid-request). Log instead.
+    && printf 'display_errors = 0\nlog_errors = 1\nerror_log = /var/www/html/storage/logs/php-error.log\n' > /usr/local/etc/php/conf.d/flarum-logging.ini
 
 # ── Build-time setup: install Flarum, enable extensions, seed content ─
 # This runs MariaDB temporarily during build to pre-populate everything.

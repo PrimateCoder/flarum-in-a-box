@@ -18,7 +18,6 @@ group_id	permission
 4	discussion.rename
 4	discussion.sticky
 4	discussion.tag
-4	discussion.viewIpsPosts
 4	user.suspend
 4	viewFlags
 

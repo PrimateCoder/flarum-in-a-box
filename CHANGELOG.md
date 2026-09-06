@@ -2,6 +2,11 @@
 
 All notable changes to Flarum-In-A-Box are documented here.
 
+## 0.1.0 — 2026-09-05
+
+### Added
+- **Flarum 1.x edition** — all-in-one container with Flarum 1.8.19, PHP 8.3, MariaDB, nginx, and 40+ curated extensions, published as image tags `0.1.y`, `0.1`, and `flarum1`
+
 ## 0.2.16 — 2026-08-27
 
 ### Changed

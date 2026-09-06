@@ -107,21 +107,21 @@ function import_settings(PDO $pdo, array $rows): void {
 function import_tags(PDO $pdo, array $rows): void {
     if (!$rows) return;
     $header = array_map('strtolower', array_shift($rows));
-    $expected = ['id','name','slug','description','color','icon','is_primary','position'];
+    $expected = ['id','name','slug','description','color','icon','parent_id','position'];
     if ($header !== $expected) {
         fwrite(STDERR, "ERROR: tags.tsv header mismatch.\n  expected: " . implode("\t", $expected) . "\n  got:      " . implode("\t", $header) . "\n");
         exit(1);
     }
     $stmt = $pdo->prepare(
-        'INSERT INTO flarum_tags (id, name, slug, description, color, icon, is_primary, position)
-         VALUES (:id, :name, :slug, :description, :color, :icon, :is_primary, :position)
+        'INSERT INTO flarum_tags (id, name, slug, description, color, icon, parent_id, position)
+         VALUES (:id, :name, :slug, :description, :color, :icon, :parent_id, :position)
          ON DUPLICATE KEY UPDATE
             name = VALUES(name),
             slug = VALUES(slug),
             description = VALUES(description),
             color = VALUES(color),
             icon = VALUES(icon),
-            is_primary = VALUES(is_primary),
+            parent_id = VALUES(parent_id),
             position = VALUES(position)'
     );
     $slugs_seen = [];
@@ -130,7 +130,7 @@ function import_tags(PDO $pdo, array $rows): void {
             fwrite(STDERR, "ERROR: tags row " . ($i + 1) . " has " . count($row) . " columns, expected 8\n");
             exit(1);
         }
-        [$id, $name, $slug, $desc, $color, $icon, $is_primary, $position] = $row;
+        [$id, $name, $slug, $desc, $color, $icon, $parent_id, $position] = $row;
         if (isset($slugs_seen[$slug])) {
             fwrite(STDERR, "ERROR: duplicate tag slug '$slug' in tags.tsv\n");
             exit(1);
@@ -143,7 +143,7 @@ function import_tags(PDO $pdo, array $rows): void {
             ':description' => $desc,
             ':color' => $color,
             ':icon' => $icon,
-            ':is_primary' => (int) $is_primary,
+            ':parent_id' => $parent_id === '\\N' ? null : (int) $parent_id,
             ':position' => $position === '\\N' ? null : (int) $position,
         ]);
         echo "    tag: #$id $slug ($name)\n";

@@ -1,0 +1,19 @@
+{
+    "name": "pianotell/flarum-demo-auto-confirm",
+    "description": "Flarum-In-A-Box demo helper: auto-confirms email on signup so the demo works without a mail server",
+    "type": "flarum-extension",
+    "keywords": [
+        "flarum",
+        "demo",
+        "email"
+    ],
+    "license": "MIT",
+    "require": {
+        "flarum/core": "^1.0"
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Demo Auto-Confirm"
+        }
+    }
+}

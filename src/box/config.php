@@ -30,7 +30,9 @@
 return [
     'debug' => false,
     'database' => [
-        'driver' => 'mariadb',
+        // Flarum 1.x only knows the 'mysql' driver — it still connects to
+        // MariaDB (the 2.x edition on main uses the 'mariadb' driver key).
+        'driver' => 'mysql',
         'host' => 'localhost',
         'port' => 3306,
         'database' => 'flarum',

@@ -4,34 +4,46 @@
 # fof-best-answer), NOT slashes — they are what `php flarum extension:enable
 # <id>` expects.
 #
+# NOTE (Flarum 1.x quirk): unlike 2.x, a YAML install does NOT enable the
+# bundled flarum/* extensions when the `extensions:` config key is absent —
+# so the bundled whitelist IS listed here explicitly (approval included).
+# The default-enabled set mirrors the 2.x edition on main: never enable
+# here what main doesn't enable by default.
+#
 # To install a new extension:
-#   1. Add the composer package name to src/box/Dockerfile EXTENSIONS list
+#   1. Add the composer package name to src/box/composer.json.TEMPLATE
 #      (also alphabetically sorted)
 #   2. Add the corresponding extension ID here to enable it by default
 #      (or omit here to leave it installed-but-disabled)
 
-acpl-mobile-tab
 antoinefr-bbcode-fa
-datlechin-mermaid
-ekumanov-forum-widgets
-ekumanov-inline-audio
-ekumanov-markdown-tables
-ekumanov-post-search
-flarum-audit
+# flarum-flags must precede flarum-approval (approval requires flags).
+flarum-flags
+flarum-approval
+flarum-bbcode
+flarum-emoji
 flarum-extension-manager
-fof-bbcode-details
+flarum-flags
+flarum-lang-english
+flarum-likes
+flarum-lock
+flarum-markdown
+flarum-mentions
+flarum-nicknames
+flarum-statistics
+flarum-sticky
+flarum-subscriptions
+flarum-suspend
+flarum-tags
 fof-best-answer
 fof-byobu
-fof-categories
 fof-discussion-views
 fof-drafts
 fof-follow-tags
 fof-formatting
-fof-frontpage
 fof-gamification
 fof-ignore-users
 fof-impersonate
-fof-linguist
 fof-links
 fof-merge-discussions
 fof-moderator-notes
@@ -39,27 +51,13 @@ fof-move-posts
 fof-photoswipe
 fof-polls
 fof-reactions
-fof-rich-text
 fof-sitemap
 fof-split
-fof-synopsis
 fof-upload
 fof-user-bio
 fof-user-directory
-forumaker-magicread
-forumaker-magicslider
-forumaker-profile-cover
-huseyinfiliz-diff
-huseyinfiliz-stickiest
 ianm-log-viewer
-linkrobins-auto-verify
 michaelbelgium-profile-views
+pianotell-demo-auto-confirm
 pianotell-flamoji
-ralkage-profile-messages
-ramon-backup
-resofire-menu-control
-resofire-mobile-search
 rob006-last-post-avatar
-tryhackx-topic-rating
-walsgit-external-links-in-new-tab
-walsgit-recycle-bin

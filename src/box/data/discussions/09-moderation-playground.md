@@ -23,23 +23,15 @@ Log in as **moderator** (password: `password`) and try out:
 
 ### The moderation flow
 
-Here's roughly what happens from a heated post to a resolution (rendered with the bundled [**Mermaid**](https://mermaid.ai/open-source/) extension — write a `mermaid` fenced block in any post to make your own):
+Here's roughly what happens from a heated post to a resolution:
 
-```mermaid
-flowchart TD
-    A[User posts something heated] --> B{Anyone flags it?}
-    B -- No --> C[Stays visible]
-    B -- Yes --> D[Mod sees flag indicator]
-    D --> E{What's the right action?}
-    E -->|Borderline| F[✏️ Edit to clean up]
-    E -->|Off-topic / rude| G[🚫 Hide post]
-    E -->|Argument escalating| H[🔒 Lock discussion]
-    E -->|Repeat offender| I[🚷 Suspend user]
-    F --> J[Action logged]
-    G --> J
-    H --> J
-    I --> J
-    J --> K[👁️ Review in Admin → Log Viewer]
-```
+1. A user posts something heated.
+2. Someone flags it — if nobody does, it just stays visible.
+3. A moderator sees the flag indicator and picks the right action:
+   - **Borderline** → ✏️ edit to clean up
+   - **Off-topic / rude** → 🚫 hide the post
+   - **Argument escalating** → 🔒 lock the discussion
+   - **Repeat offender** → 🚷 suspend the user
+4. 👁️ Review the audit trail in Admin → Log Viewer.
 
 Now scroll down — the gloves are off. 👇

@@ -2,9 +2,11 @@ name: Build and Push Docker Image
 
 on:
   # Build only on tag push (releases) and manual dispatch.
-  # Day-to-day commits to main don't trigger builds — tag a release to publish.
+  # Day-to-day commits to the 1.x branch don't trigger builds — tag a
+  # release to publish. (The 2.x edition lives on `main` and owns the
+  # `latest` Docker tag; this branch publishes `flarum1` instead.)
   push:
-    tags: ['v*']
+    tags: ['v0.1*']
   workflow_dispatch:
 
 env:
@@ -17,7 +19,7 @@ concurrency:
 
 jobs:
   # Build each architecture in parallel on a native runner of that architecture.
-  # No QEMU emulation = setup.sh (MariaDB + ~80 extensions + seeding) finishes
+  # No QEMU emulation = setup.sh (MariaDB + 40+ extensions + seeding) finishes
   # in ~1 min instead of ~15 min on each side.
   build:
     strategy:
@@ -109,13 +111,15 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.IMAGE_NAME }}
-          # On tag push: 0.2.1, 0.2, latest, sha-xxx
-          # On manual dispatch (from main): latest, sha-xxx
+          # On tag push: 0.1.1, 0.1, flarum1, sha-xxx
+          # On manual dispatch (from 1.x): flarum1, sha-xxx
           tags: |
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=sha
-            type=raw,value=latest,enable=${{ github.ref_type == 'tag' || github.ref == 'refs/heads/main' }}
+            # This branch publishes `flarum1`, never `latest` — `latest`
+            # always points at the Flarum 2.x edition built from main.
+            type=raw,value=flarum1,enable=${{ github.ref_type == 'tag' || github.ref == 'refs/heads/1.x' }}
 
       - name: Create manifest list and push
         working-directory: /tmp/digests
