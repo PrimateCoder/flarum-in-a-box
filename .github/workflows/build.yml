@@ -120,6 +120,10 @@ jobs:
             # This branch publishes `flarum1`, never `latest` — `latest`
             # always points at the Flarum 2.x edition built from main.
             type=raw,value=flarum1,enable=${{ github.ref_type == 'tag' || github.ref == 'refs/heads/1.x' }}
+          # metadata-action defaults to flavor latest=auto, which silently
+          # attaches `latest` to stable semver tags — disable it or every
+          # v0.1.y release would clobber the 2.x edition's `latest`.
+          flavor: latest=false
 
       - name: Create manifest list and push
         working-directory: /tmp/digests
